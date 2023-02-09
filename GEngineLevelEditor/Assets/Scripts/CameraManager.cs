@@ -28,22 +28,9 @@ public class CameraManager : MonoBehaviour
     private bool m_isControlingCamera = false;
     private bool m_previousCameraControlValue = false;
     private bool m_isDoubleSpeed = false;
-
     private Vector2 m_inputDirection = Vector2.zero;
     private Vector2 m_inputRotation = Vector2.zero;
     
-    /*
-     Vector3 mousePosition = Input.mousePosition;
-     mousePosition.z = Camera.main.nearClipPlane;
-     
-     Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-     RaycastHit hit;
-     
-     if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-     {
-         Debug.DrawLine(hit.point, hit.point + Vector3.up * 100.0f, Color.black, 10.0f);
-     }
-    */
     // Update is called once per frame
     void Update()
     {
