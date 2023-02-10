@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class CameraManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private PlayerInput m_playerInput = null;
     [SerializeField] private Transform m_cameraTransform = null;
 
     [Header("Parameters")]
@@ -15,6 +14,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private string m_movementRotationActionName = null;
     [SerializeField] private string m_movementMultiplierActionName = null;
     [SerializeField] private string m_movementDoubleSpeedActionName = null;
+    [SerializeField] private string m_movementHalfSpeedActionName = null;
 
     [Space(20.0f)]
 
@@ -26,39 +26,41 @@ public class CameraManager : MonoBehaviour
     private float m_cameraMovementSpeedMultiplierStep = 0.0f;
     private float m_movementMultiplierAxisValue = 0.0f;
     private bool m_isControlingCamera = false;
-    private bool m_previousCameraControlValue = false;
+    private bool m_previousIsCameraControlValue = false;
     private bool m_isDoubleSpeed = false;
+    private bool m_isHalfSpeed = false;
     private Vector2 m_inputDirection = Vector2.zero;
     private Vector2 m_inputRotation = Vector2.zero;
     
     // Update is called once per frame
-    void Update()
+    public void UpdateCameraManager(PlayerInput playerInput)
     {
-        ProcessInput();
+        ProcessInput(playerInput);
         UpdateCursor();
         UpdateCameraRotation();
         UpdateCameraMovement();
         UpdateMovementMultiplier();
     }
 
-    void ProcessInput()
+    private void ProcessInput(PlayerInput playerInput)
     {
-        m_isControlingCamera = m_playerInput.actions[m_movementChangeInputActionName].IsPressed();
-        m_isDoubleSpeed = m_playerInput.actions[m_movementDoubleSpeedActionName].IsPressed();
-        m_inputDirection = m_playerInput.actions[m_movementDirectionActionName].ReadValue<Vector2>().normalized;
-        m_inputRotation = m_playerInput.actions[m_movementRotationActionName].ReadValue<Vector2>().normalized;
-        m_movementMultiplierAxisValue = m_playerInput.actions[m_movementMultiplierActionName].ReadValue<float>();
+        m_isControlingCamera = playerInput.actions[m_movementChangeInputActionName].IsPressed();
+        m_isDoubleSpeed = playerInput.actions[m_movementDoubleSpeedActionName].IsPressed();
+        m_isHalfSpeed = playerInput.actions[m_movementHalfSpeedActionName].IsPressed();
+        m_inputDirection = playerInput.actions[m_movementDirectionActionName].ReadValue<Vector2>().normalized;
+        m_inputRotation = playerInput.actions[m_movementRotationActionName].ReadValue<Vector2>().normalized;
+        m_movementMultiplierAxisValue = playerInput.actions[m_movementMultiplierActionName].ReadValue<float>();
     }
-    void UpdateCursor()
+    private void UpdateCursor()
     {
-        if (m_isControlingCamera == m_previousCameraControlValue)
+        if (m_isControlingCamera == m_previousIsCameraControlValue)
             return;
 
         Cursor.visible = !m_isControlingCamera;
 
-        m_previousCameraControlValue = m_isControlingCamera;
+        m_previousIsCameraControlValue = m_isControlingCamera;
     }
-    void UpdateCameraMovement()
+    private void UpdateCameraMovement()
     {
         if (!m_isControlingCamera)
             return;
@@ -68,10 +70,14 @@ public class CameraManager : MonoBehaviour
 
         Vector3 newPosition = (m_cameraTransform.forward * m_inputDirection.y) + (m_cameraTransform.right * m_inputDirection.x);
         float movementMultiplier = Time.deltaTime * m_cameraMovementSpeed * m_cameraMovementSpeedMultiplier;
-        m_cameraTransform.position += newPosition * movementMultiplier * ((m_isDoubleSpeed)? 2:1);
+        float speedMultiplier = ((m_isDoubleSpeed) ? 2 : 1);
+        if (m_isHalfSpeed)
+            speedMultiplier = 0.5f;
+
+        m_cameraTransform.position += newPosition * movementMultiplier * speedMultiplier;
     }
 
-    void UpdateCameraRotation()
+    private void UpdateCameraRotation()
     {
         if (!m_isControlingCamera)
             return;
@@ -85,7 +91,7 @@ public class CameraManager : MonoBehaviour
 
         m_cameraTransform.rotation = Quaternion.Euler(newEulerRotation);
     }
-    public void UpdateMovementMultiplier()
+    private void UpdateMovementMultiplier()
     {
         if (!m_isControlingCamera)
             return;
@@ -107,4 +113,8 @@ public class CameraManager : MonoBehaviour
         if (m_cameraMovementSpeedMultiplier < 0.1f)
             m_cameraMovementSpeedMultiplier = 0.1f;
     }
+
+    public bool GetIsCameraActive() { return m_isControlingCamera; }
+    public bool GetIsDoubleSpeed() { return m_isDoubleSpeed; }
+    public bool GetIsHalfSpeed() { return m_isHalfSpeed; }
 }
