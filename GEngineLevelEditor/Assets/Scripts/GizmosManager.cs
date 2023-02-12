@@ -34,10 +34,20 @@ public class GizmosManager : MonoBehaviour
     private Transform m_currentlySelectedObject = null;
     public void UpdateGizmos(PlayerInput playerInput, Vector3 mousePosition)
     {
+        UpdateGizmosLocation();
         UpdateGizmosInput(playerInput);
         UpdateSelectedGizmo(mousePosition);
     }
 
+    private void UpdateGizmosLocation()
+    {
+        if (!m_currentlySelectedObject)
+            return;
+
+        m_locationGizmos.transform.position = m_currentlySelectedObject.position;
+        m_rotationGizmos.transform.position = m_currentlySelectedObject.position;
+        m_scaleGizmos.transform.position = m_currentlySelectedObject.position;
+    }
     private void UpdateSelectedGizmo(Vector3 mousePosition)
     {
         if (!m_currentlySelectedGizmo)
@@ -161,15 +171,6 @@ public class GizmosManager : MonoBehaviour
     {
         if (!newlySelectedObject)
             return;
-
-        m_locationGizmos.transform.SetParent(newlySelectedObject);
-        m_locationGizmos.transform.localPosition = Vector3.zero;
-
-        m_rotationGizmos.transform.SetParent(newlySelectedObject);
-        m_rotationGizmos.transform.localPosition = Vector3.zero;
-
-        m_scaleGizmos.transform.SetParent(newlySelectedObject);
-        m_scaleGizmos.transform.localPosition = Vector3.zero;
 
         ActivateGizmoOnSelection();
         m_currentlySelectedObject = newlySelectedObject;

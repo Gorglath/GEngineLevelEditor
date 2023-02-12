@@ -15,12 +15,10 @@ public class LocationGizmo : Gizmo
 {
     [Header("Parameters")]
     [SerializeField] private ELocationGizmoType m_locationGizmoType = ELocationGizmoType.NONE;
-    [Range(1.0f, 100.0f)] [SerializeField] private float m_movementSpeed = 1.0f;
-    //helpers
-    private float m_movementSpeedMultiplied = 1.0f;
+    
     private void Start()
     {
-        m_movementSpeedMultiplied = m_movementSpeed;
+        m_speedMultiplied = m_speed;
     }
     
     public override void UseGizmo(Transform affectedObject, Vector3 mousePosition)
@@ -80,11 +78,11 @@ public class LocationGizmo : Gizmo
     }
     private void MoveAffectedObject(Transform affectedObject,Vector3 direction, bool m_isInverted)
     {
-        affectedObject.position += direction * ((m_isInverted) ? -1 : 1) * Time.deltaTime * m_movementSpeedMultiplied;
+        affectedObject.position += direction * ((m_isInverted) ? -1 : 1) * Time.deltaTime * m_speedMultiplied;
     }
 
     public override void MultiplySpeed(float value)
     {
-        m_movementSpeedMultiplied = m_movementSpeed * value;
+        m_speedMultiplied = m_speed * value;
     }
 }
