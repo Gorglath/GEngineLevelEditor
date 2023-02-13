@@ -29,7 +29,6 @@ public class GizmosManager : MonoBehaviour
 
     //helpers
     private EGizmoState m_currentGizmoState = EGizmoState.LOCATION;
-    private EGizmoOrientation m_currentGizmoOrientation = EGizmoOrientation.WORLD;
     private Gizmo m_currentlySelectedGizmo = null;
     private Transform m_currentlySelectedObject = null;
     public void UpdateGizmos(PlayerInput playerInput, Vector3 mousePosition)
@@ -47,6 +46,14 @@ public class GizmosManager : MonoBehaviour
         m_locationGizmos.transform.position = m_currentlySelectedObject.position;
         m_rotationGizmos.transform.position = m_currentlySelectedObject.position;
         m_scaleGizmos.transform.position = m_currentlySelectedObject.position;
+    }
+    public void UnselectedObject()
+    {
+        m_currentlySelectedObject = null;
+
+        m_locationGizmos.SetActive(false);
+        m_rotationGizmos.SetActive(false);
+        m_scaleGizmos.SetActive(false);
     }
     private void UpdateSelectedGizmo(Vector3 mousePosition)
     {

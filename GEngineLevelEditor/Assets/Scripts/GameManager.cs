@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManager m_cameraManager = null;
     [SerializeField] private SelectionManager m_selectionManager = null;
     [SerializeField] private GizmosManager m_gizmosManager = null;
+    [SerializeField] private UIManager m_uiManager = null;
 
 
     private void Update()
@@ -24,11 +25,23 @@ public class GameManager : MonoBehaviour
 
     private void UpdateManagersCommunication()
     {
+        if (m_uiManager.GetIsSelectingUI())
+            return;
+
         if (m_selectionManager.GetDidSelectNewObject())
         {
             m_selectionManager.SetDidSelectNewObject(false);
             m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
+            m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
             return;
+        }
+        else
+        {
+            if (!m_selectionManager.GetCurrentlySelectedObject())
+            {
+                m_uiManager.UnselectedObject();
+                m_gizmosManager.UnselectedObject();
+            }
         }
 
         if(m_selectionManager.GetDidSelectNewGizmo())
@@ -56,6 +69,15 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateManagers()
     {
+        if (!m_uiManager)
+            return;
+
+        m_uiManager.RefreshTransform();
+
+        if (m_uiManager.GetIsSelectingUI())
+            return;
+
+
         if (!m_cameraManager)
             return;
 
@@ -73,5 +95,6 @@ public class GameManager : MonoBehaviour
             return;
 
         m_gizmosManager.UpdateGizmos(m_playerInput,m_selectionManager.GetMousePosition());
+
     }
 }
