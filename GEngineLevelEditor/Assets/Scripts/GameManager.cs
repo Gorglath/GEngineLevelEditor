@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateManagers()
     {
+        if (!m_gizmosManager)
+            return;
+
+        m_gizmosManager.UpdateGizmos(m_playerInput, m_selectionManager.GetMousePosition());
+
         if (!m_uiManager)
             return;
 
@@ -90,11 +95,5 @@ public class GameManager : MonoBehaviour
             return;
 
         m_selectionManager.UpdateSelectionManager(m_playerInput);
-
-        if (!m_gizmosManager)
-            return;
-
-        m_gizmosManager.UpdateGizmos(m_playerInput,m_selectionManager.GetMousePosition());
-
     }
 }

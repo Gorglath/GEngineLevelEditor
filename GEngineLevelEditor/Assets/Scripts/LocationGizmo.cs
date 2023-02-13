@@ -35,50 +35,62 @@ public class LocationGizmo : Gizmo
 
     private void UpdateAffectedObjectLocation(Transform affectedObject,Vector3 mousePosition)
     {
+        Vector3 direction = (mousePosition - m_previousMousePosition).normalized;
         switch (m_locationGizmoType)
         {
             case ELocationGizmoType.NONE:
                 return;
             case ELocationGizmoType.UP:
-                MoveUp(affectedObject, mousePosition);
+                MoveUp(affectedObject, direction);
                 break;
             case ELocationGizmoType.FORWARD:
-                MoveForward(affectedObject, mousePosition);
+                MoveForward(affectedObject, direction);
                 break;
             case ELocationGizmoType.RIGHT:
-                MoveRight(affectedObject, mousePosition);
+                MoveRight(affectedObject, direction);
                 break;
             case ELocationGizmoType.UP_RIGHT:
-                MoveRight(affectedObject, mousePosition);
-                MoveUp(affectedObject, mousePosition);
+                MoveUpRight(affectedObject, direction);
                 break;
             case ELocationGizmoType.UP_FORWARD:
-                MoveUp(affectedObject, mousePosition);
-                MoveForward(affectedObject, mousePosition);
+                MoveUpForward(affectedObject,direction);
                 break;
             default:
                 return;
         }
     }
 
-    private void MoveUp(Transform affectedObject,Vector3 mousePosition)
+    private void MoveUpRight(Transform affectedObject, Vector3 dir)
     {
-        bool isInverted = (m_previousMousePosition.y > mousePosition.y);
-        MoveAffectedObject(affectedObject, Vector3.up, isInverted);
+        Vector3 direction = new Vector3(dir.x, dir.y, 0.0f);
+
+        MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveForward(Transform affectedObject, Vector3 mousePosition)
+
+    private void MoveUpForward(Transform affectedObject, Vector3 dir)
     {
-        bool isInverted = (m_previousMousePosition.x > mousePosition.x);
-        MoveAffectedObject(affectedObject, Vector3.forward, isInverted);
+        Vector3 direction = new Vector3(0.0f, dir.y, dir.x);
+
+        MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveRight(Transform affectedObject, Vector3 mousePosition)
+    private void MoveUp(Transform affectedObject,Vector3 dir)
     {
-        bool isInverted = (m_previousMousePosition.x > mousePosition.x);
-        MoveAffectedObject(affectedObject, Vector3.right, isInverted);
+        Vector3 direction = new Vector3(0.0f, dir.y, 0.0f);
+        MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveAffectedObject(Transform affectedObject,Vector3 direction, bool m_isInverted)
+    private void MoveForward(Transform affectedObject, Vector3 dir)
     {
-        affectedObject.position += direction * ((m_isInverted) ? -1 : 1) * Time.deltaTime * m_speedMultiplied;
+        Vector3 direction = new Vector3(0.0f, 0.0f, dir.x);
+        MoveAffectedObject(affectedObject, direction);
+    }
+    private void MoveRight(Transform affectedObject, Vector3 dir)
+    {
+        Vector3 direction = new Vector3(dir.x, 0.0f, 0.0f);
+        MoveAffectedObject(affectedObject, direction);
+    }
+    private void MoveAffectedObject(Transform affectedObject,Vector3 direction)
+    {
+        affectedObject.position += direction * Time.deltaTime * m_speedMultiplied;
     }
 
     public override void MultiplySpeed(float value)

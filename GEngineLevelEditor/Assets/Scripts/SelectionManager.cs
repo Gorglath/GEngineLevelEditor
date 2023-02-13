@@ -33,6 +33,7 @@ public class SelectionManager : MonoBehaviour
         
         if(playerInput.actions[m_mouseSelectionActionName].WasReleasedThisFrame())
         {
+            Cursor.visible = true;
             m_currentlySelectedGizmo = null;
             m_didSelectGizmo = false;
         }
@@ -64,6 +65,7 @@ public class SelectionManager : MonoBehaviour
 
     private void HandleGizmosSelect(RaycastHit hit)
     {
+        Cursor.visible = false;
         m_currentlySelectedGizmo = hit.transform;
         m_didSelectGizmo = true;
     }
