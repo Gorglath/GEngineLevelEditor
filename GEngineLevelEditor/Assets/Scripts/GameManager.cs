@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SelectionManager m_selectionManager = null;
     [SerializeField] private GizmosManager m_gizmosManager = null;
     [SerializeField] private UIManager m_uiManager = null;
-
+    [SerializeField] private AssetManager m_assetManager = null;
 
     private void Update()
     {
@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
 
     private void UpdateManagersCommunication()
     {
+        if(m_assetManager.GetDidSpawnNewObject())
+        {
+            m_selectionManager.SelectObject(m_assetManager.GetNewlySpawnedObject());
+            m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
+            m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
+            return;
+        }
         if (m_uiManager.GetIsSelectingUI())
             return;
 
@@ -33,6 +40,7 @@ public class GameManager : MonoBehaviour
             m_selectionManager.SetDidSelectNewObject(false);
             m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
+            m_assetManager.UpdateSelectedObject(m_selectionManager.GetCurrentlySelectedObject());
             return;
         }
         else

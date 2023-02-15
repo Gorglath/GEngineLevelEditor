@@ -25,6 +25,11 @@ public class SelectionManager : MonoBehaviour
         UpdateObjectSelection(playerInput);
     }
 
+    public void SelectObject(Transform objectToSelect)
+    {
+        m_currentlySelectedObject = objectToSelect;
+        m_didSelectNewObject = true;
+    }
     public Vector3 GetMousePosition() { return m_mousePosition; } 
     private void UpdateObjectSelection(PlayerInput playerInput)
     {

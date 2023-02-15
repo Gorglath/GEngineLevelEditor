@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
             return;
 
         Vector3 currentScale = m_currentlySelectedObject.localScale;
-        currentScale.x = numberValue;
+        currentScale.y = numberValue;
         m_currentlySelectedObject.localScale = currentScale;
     }
     public void UpdateZScaleInpuField(string value)
@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
             return;
 
         Vector3 currentScale = m_currentlySelectedObject.localScale;
-        currentScale.x = numberValue;
+        currentScale.z = numberValue;
         m_currentlySelectedObject.localScale = currentScale;
     }
 }
