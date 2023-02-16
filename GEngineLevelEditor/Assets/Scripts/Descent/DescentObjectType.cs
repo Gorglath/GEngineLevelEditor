@@ -45,6 +45,12 @@ public class DescentObjectType : MonoBehaviour
     public EDescentObstacleType m_obstacleType = EDescentObstacleType.NONE;
     [HideInInspector]
     public EDescentPickupType m_pickupType = EDescentPickupType.NONE;
-    
-
+    [HideInInspector]
+    public int m_enemyHealth = 10;
+    [HideInInspector]
+    public int m_scoreAmount = 10;
+    [HideInInspector]
+    public int m_ammoCount = 10;
+    [HideInInspector]
+    public int m_lifeCount = 1;
 }

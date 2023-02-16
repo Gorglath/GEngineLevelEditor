@@ -20,26 +20,12 @@ public class DescentObjectDataEditor : Editor
             case EDescentObjectType.TRANSFORM:
                 break;
             case EDescentObjectType.ENEMY:
-                EditorGUILayout.BeginHorizontal();
-
-                EditorGUILayout.LabelField("Enemy Type");
-
-                // Show and save the value of b
-                script.m_enemyType = (EDescentEnemyType)EditorGUILayout.EnumPopup(script.m_enemyType);
-
-                EditorGUILayout.EndHorizontal();
+                CreateEnemyGUI(script);
                 break;
             case EDescentObjectType.PLAYER:
                 break;
             case EDescentObjectType.PICKUP:
-                EditorGUILayout.BeginHorizontal();
-
-                EditorGUILayout.LabelField("Pickup Type");
-
-                // Show and save the value of b
-                script.m_pickupType = (EDescentPickupType)EditorGUILayout.EnumPopup(script.m_pickupType);
-
-                EditorGUILayout.EndHorizontal();
+                CreatePickupGUI(script);
                 break;
             case EDescentObjectType.OBSTACLE:
                 EditorGUILayout.BeginHorizontal();
@@ -49,6 +35,77 @@ public class DescentObjectDataEditor : Editor
                 script.m_obstacleType = (EDescentObstacleType)EditorGUILayout.EnumPopup(script.m_obstacleType);
 
                 EditorGUILayout.EndHorizontal();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CreateEnemyGUI(DescentObjectType objectType)
+    {
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Enemy Type");
+
+        // Show and save the value of b
+        objectType.m_enemyType = (EDescentEnemyType)EditorGUILayout.EnumPopup(objectType.m_enemyType);
+
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Enemy Health");
+
+        // Show and save the value of b
+        objectType.m_enemyHealth = EditorGUILayout.IntSlider(objectType.m_enemyHealth, 1,1000);
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void CreatePickupGUI(DescentObjectType objectType)
+    {
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Pickup Type");
+
+        // Show and save the value of b
+        objectType.m_pickupType = (EDescentPickupType)EditorGUILayout.EnumPopup(objectType.m_pickupType);
+
+        EditorGUILayout.EndHorizontal();
+
+
+        switch (objectType.m_pickupType)
+        {
+            case EDescentPickupType.NONE:
+                break;
+            case EDescentPickupType.SCORE:
+                EditorGUILayout.BeginHorizontal();
+
+                EditorGUILayout.LabelField("Score Amount");
+
+                objectType.m_scoreAmount = EditorGUILayout.IntSlider(objectType.m_scoreAmount, 1, 1000);
+
+                EditorGUILayout.EndHorizontal();
+                break;
+            case EDescentPickupType.HEALTH:
+                EditorGUILayout.BeginHorizontal();
+
+                EditorGUILayout.LabelField("Life Amount");
+
+                objectType.m_lifeCount = EditorGUILayout.IntSlider(objectType.m_lifeCount, 1, 3);
+
+                EditorGUILayout.EndHorizontal();
+                break;
+            case EDescentPickupType.AMMO:
+                EditorGUILayout.BeginHorizontal();
+
+                EditorGUILayout.LabelField("Ammo Amount");
+
+                objectType.m_ammoCount = EditorGUILayout.IntSlider(objectType.m_ammoCount, 1, 120);
+
+                EditorGUILayout.EndHorizontal();
+                break;
+            case EDescentPickupType.HOSTAGE:
                 break;
             default:
                 break;

@@ -9,7 +9,10 @@ public class AssetManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform m_assetMenuTransform = null;
     [SerializeField] private Transform m_subAssetMenuTransform = null;
+    [Space(20.0f)]
 
+    [SerializeField] private Transform m_levelParentTransform = null;
+    
     [Space(20.0f)]
     
     [SerializeField] private GameObject m_buttonPrefab = null;
@@ -70,7 +73,10 @@ public class AssetManager : MonoBehaviour
 
     public void SpawnSelectedIcon(int index)
     {
-        GameObject spawnedObject = Instantiate(m_assetGroupToSpawn[m_currentGroupIndex].m_groupAssetTiles[index].m_assetPrefab);
+        if (!m_levelParentTransform)
+            return;
+
+        GameObject spawnedObject = Instantiate(m_assetGroupToSpawn[m_currentGroupIndex].m_groupAssetTiles[index].m_assetPrefab, m_levelParentTransform);
         Vector3 spawnLocation = Vector3.zero;
         
         if (m_currentlySelectedObject)
