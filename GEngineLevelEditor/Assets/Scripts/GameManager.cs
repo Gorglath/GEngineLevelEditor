@@ -77,6 +77,14 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateManagers()
     {
+        if (!m_cameraManager)
+            return;
+
+        m_cameraManager.UpdateCameraManager(m_playerInput);
+
+        if (m_cameraManager.GetIsCameraActive())
+            return;
+
         if (!m_gizmosManager)
             return;
 
@@ -91,13 +99,6 @@ public class GameManager : MonoBehaviour
             return;
 
 
-        if (!m_cameraManager)
-            return;
-
-        m_cameraManager.UpdateCameraManager(m_playerInput);
-
-        if (m_cameraManager.GetIsCameraActive())
-            return;
 
         if (!m_selectionManager)
             return;

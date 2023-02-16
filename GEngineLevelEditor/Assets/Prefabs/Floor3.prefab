@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8392158330528109719}
   - component: {fileID: 2136124496127853413}
   - component: {fileID: 7933988577376049856}
+  - component: {fileID: -3670484362694187400}
   m_Layer: 0
   m_Name: Floor3
   m_TagString: Untagged
@@ -97,3 +98,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3670484362694187400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3015911120993195358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24cbab996c262414798186e90fdaacc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectType: 1
+  m_enemyType: 0
+  m_obstacleType: 0
+  m_pickupType: 0
