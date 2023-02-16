@@ -107,4 +107,9 @@ public class AssetManager : MonoBehaviour
 
         m_currentlySelectedObject = currentlySelectedObject;
     }
+
+    public void ResetSelectedObject()
+    {
+        m_currentlySelectedObject = null;
+    }
 }

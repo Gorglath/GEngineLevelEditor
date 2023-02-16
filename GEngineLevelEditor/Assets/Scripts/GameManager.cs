@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
             {
                 m_uiManager.UnselectedObject();
                 m_gizmosManager.UnselectedObject();
+                m_assetManager.ResetSelectedObject();
             }
         }
 

@@ -20,6 +20,7 @@ public class CameraManager : MonoBehaviour
 
     [Range(1.0f,100.0f)] [SerializeField] private float m_cameraMovementSpeed = 10.0f;
     [Range(100.0f, 1000.0f)] [SerializeField] private float m_cameraRotationSpeed = 10.0f;
+    [Range(1.0f, 1000.0f)] [SerializeField] private float m_cameraZoomSpeed = 10.0f;
 
     //helpers
     private float m_cameraMovementSpeedMultiplier = 1.0f;
@@ -40,6 +41,7 @@ public class CameraManager : MonoBehaviour
         UpdateCameraRotation();
         UpdateCameraMovement();
         UpdateMovementMultiplier();
+        UpdateCameraZoom();
     }
 
     private void ProcessInput(PlayerInput playerInput)
@@ -113,7 +115,19 @@ public class CameraManager : MonoBehaviour
         if (m_cameraMovementSpeedMultiplier < 0.1f)
             m_cameraMovementSpeedMultiplier = 0.1f;
     }
+    private void UpdateCameraZoom()
+    {
+        if (m_isControlingCamera)
+            return;
 
+        Vector3 direction = Vector3.zero;
+        if (m_movementMultiplierAxisValue > 0.0f)
+            direction = m_cameraTransform.forward;
+        if (m_movementMultiplierAxisValue < 0.0f)
+            direction = -m_cameraTransform.forward;
+
+        m_cameraTransform.position += direction * m_cameraZoomSpeed * Time.deltaTime;
+    }
     public bool GetIsCameraActive() { return m_isControlingCamera; }
     public bool GetIsDoubleSpeed() { return m_isDoubleSpeed; }
     public bool GetIsHalfSpeed() { return m_isHalfSpeed; }
