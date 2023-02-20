@@ -5,7 +5,8 @@ using UnityEngine;
 public enum EDescentObjectType
 {
     NONE,
-    TRANSFORM,
+    WALL,
+    FLOOR,
     ENEMY,
     PLAYER,
     PICKUP,

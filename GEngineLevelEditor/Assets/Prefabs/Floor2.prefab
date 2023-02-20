@@ -110,7 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cbab996c262414798186e90fdaacc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 1
+  m_objectType: 2
   m_enemyType: 0
   m_obstacleType: 0
   m_pickupType: 0
+  m_enemyHealth: 10
+  m_scoreAmount: 10
+  m_ammoCount: 10
+  m_lifeCount: 1

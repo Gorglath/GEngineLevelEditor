@@ -17,7 +17,7 @@ public class DescentObjectDataEditor : Editor
         {
             case EDescentObjectType.NONE:
                 break;
-            case EDescentObjectType.TRANSFORM:
+            case EDescentObjectType.WALL:
                 break;
             case EDescentObjectType.ENEMY:
                 CreateEnemyGUI(script);

@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager m_uiManager = null;
     [SerializeField] private AssetManager m_assetManager = null;
 
+    [Space(20.0f)]
+
+    [SerializeField] private DescentDataUIManager m_descentUIDataManager = null;
     private void Update()
     {
         UpdateManagers();
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
             m_selectionManager.SelectObject(m_assetManager.GetNewlySpawnedObject());
             m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
+            m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
             return;
         }
         if (m_uiManager.GetIsSelectingUI())
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
             m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
             m_assetManager.UpdateSelectedObject(m_selectionManager.GetCurrentlySelectedObject());
+            m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
             return;
         }
         else
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
                 m_uiManager.UnselectedObject();
                 m_gizmosManager.UnselectedObject();
                 m_assetManager.ResetSelectedObject();
+                m_descentUIDataManager.RemoveObjectUIData();
             }
         }
 
