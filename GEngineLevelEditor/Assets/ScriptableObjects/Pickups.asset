@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5309d94da0bb8646b8fa6e35029c827, type: 3}
   m_Name: Pickups
   m_EditorClassIdentifier: 
-  m_assetGroupIcon: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
+  m_assetGroupIcon: {fileID: 21300000, guid: 108ac2ed430cbb94c83fbc6b0cc8e343, type: 3}
   m_groupAssetTiles:
   - {fileID: 11400000, guid: a376a317ed5743f49ab3b9124466dc30, type: 2}
   - {fileID: 11400000, guid: f2cfab81cb8e6f548a8cf5937aa049a0, type: 2}

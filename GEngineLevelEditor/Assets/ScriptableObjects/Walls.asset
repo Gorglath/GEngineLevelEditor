@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5309d94da0bb8646b8fa6e35029c827, type: 3}
   m_Name: Walls
   m_EditorClassIdentifier: 
-  m_assetGroupIcon: {fileID: 21300000, guid: d7094718bdac022428dd29244922d06b, type: 3}
+  m_assetGroupIcon: {fileID: 21300000, guid: ec7ef2639a8ad47449bae20211fc5689, type: 3}
   m_groupAssetTiles:
   - {fileID: 11400000, guid: 9717ee228ec3f1a44985885aa8c607fa, type: 2}
   - {fileID: 11400000, guid: d3898dfe4de981f4c8ec9b67489b155b, type: 2}

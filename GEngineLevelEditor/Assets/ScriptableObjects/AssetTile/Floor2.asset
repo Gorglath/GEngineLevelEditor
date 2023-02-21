@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Floor2
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: a70238e0f3d8ad349bcbb5dc961defc9, type: 3}
   m_assetPrefab: {fileID: 4513279864850556950, guid: 7cfe1b1fd327b414bb5226904f5e5138, type: 3}

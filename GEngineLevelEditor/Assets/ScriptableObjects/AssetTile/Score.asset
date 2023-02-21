@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Score
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: 3042b019b052942a1baf7aa49d7ca6bb, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: 30ef1c39783342c498cf7be9b2e19133, type: 3}
   m_assetPrefab: {fileID: 30939998394259281, guid: 5cf39fe46914e4646a438f08c20dc577, type: 3}

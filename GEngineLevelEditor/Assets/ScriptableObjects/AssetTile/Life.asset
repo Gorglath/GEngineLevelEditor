@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Life
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: a3ced8f7044b9de4787602a9e9b20ea7, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: f6ed50f47ab74f04fa020caf33b6058e, type: 3}
   m_assetPrefab: {fileID: 3797726909302038400, guid: 97e102a28f04d724d935639bfbeed7a5, type: 3}

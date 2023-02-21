@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Wall2
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: a70238e0f3d8ad349bcbb5dc961defc9, type: 3}
   m_assetPrefab: {fileID: 377743571638983612, guid: 8ea6788bfcba55f49aebc5c3ae7f3626, type: 3}

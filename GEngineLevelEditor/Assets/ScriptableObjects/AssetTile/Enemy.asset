@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: 144aa74618b85974a9a50f612c2fa8fd, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: 91c22c1ba24453c4e932a20d4df31927, type: 3}
   m_assetPrefab: {fileID: 7133454934191407421, guid: c49f511aeb1f1ee41b9801abb79ac637, type: 3}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Saw
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: b2e819b5eb86547408a26da0830b27fc, type: 3}
   m_assetPrefab: {fileID: 6699705928563098082, guid: c40e6f8ed07ce9a45bfe11d3b981fede, type: 3}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5686130018347456590}
   - component: {fileID: 7137678441881709023}
   - component: {fileID: 783000546466479661}
-  - component: {fileID: 8747115978340804488}
   - component: {fileID: 8686528498641119828}
+  - component: {fileID: -8436565644822192885}
   m_Layer: 0
   m_Name: Floor2
   m_TagString: Untagged
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8747115978340804488
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4513279864850556950}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8686528498641119828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +105,16 @@ MonoBehaviour:
   m_scoreAmount: 10
   m_ammoCount: 10
   m_lifeCount: 1
+--- !u!65 &-8436565644822192885
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513279864850556950}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 6.1232336e-17}
+  m_Center: {x: 0, y: 0, z: 0}

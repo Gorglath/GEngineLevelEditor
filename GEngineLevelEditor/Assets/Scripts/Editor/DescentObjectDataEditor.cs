@@ -18,6 +18,10 @@ public class DescentObjectDataEditor : Editor
             case EDescentObjectType.NONE:
                 break;
             case EDescentObjectType.WALL:
+                CreateWallGUI(script);
+                break;
+            case EDescentObjectType.FLOOR:
+                CreateFloorGUI(script);
                 break;
             case EDescentObjectType.ENEMY:
                 CreateEnemyGUI(script);
@@ -61,7 +65,27 @@ public class DescentObjectDataEditor : Editor
 
         EditorGUILayout.EndHorizontal();
     }
+    private void CreateWallGUI(DescentObjectType objectType)
+    {
+        EditorGUILayout.BeginHorizontal();
 
+        EditorGUILayout.LabelField("Wall Type");
+
+        objectType.m_wallType = (EDescentWallType)EditorGUILayout.EnumPopup(objectType.m_wallType);
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void CreateFloorGUI(DescentObjectType objectType)
+    {
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Floor Type");
+
+        objectType.m_floorType = (EDescentFloorType)EditorGUILayout.EnumPopup(objectType.m_floorType);
+
+        EditorGUILayout.EndHorizontal();
+    }
     private void CreatePickupGUI(DescentObjectType objectType)
     {
         EditorGUILayout.BeginHorizontal();

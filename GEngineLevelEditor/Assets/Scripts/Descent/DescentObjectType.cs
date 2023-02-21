@@ -10,7 +10,8 @@ public enum EDescentObjectType
     ENEMY,
     PLAYER,
     PICKUP,
-    OBSTACLE
+    OBSTACLE,
+    PROP
 }
 
 public enum EDescentEnemyType
@@ -21,7 +22,23 @@ public enum EDescentEnemyType
     BURST,
     BOSS
 }
-
+public enum EDescentWallType
+{
+    NONE,
+    NORMAL,
+    RAMP
+}
+public enum EDescentFloorType
+{
+    NONE,
+    NORMAL,
+    RAMP
+}
+public enum EDescentPropType
+{
+    NONE,
+    COMPUTER
+}
 public enum EDescentPickupType
 {
     NONE,
@@ -46,6 +63,12 @@ public class DescentObjectType : MonoBehaviour
     public EDescentObstacleType m_obstacleType = EDescentObstacleType.NONE;
     [HideInInspector]
     public EDescentPickupType m_pickupType = EDescentPickupType.NONE;
+    [HideInInspector]
+    public EDescentFloorType m_floorType = EDescentFloorType.NONE;
+    [HideInInspector]
+    public EDescentWallType m_wallType = EDescentWallType.NONE;
+    [HideInInspector]
+    public EDescentPropType m_propType = EDescentPropType.NONE;
     [HideInInspector]
     public int m_enemyHealth = 10;
     [HideInInspector]

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0ea59860c3b24f998bb44beb37e08, type: 3}
   m_Name: Ammo
   m_EditorClassIdentifier: 
-  m_assetIconSprite: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
+  m_assetIconSprite: {fileID: 21300000, guid: 703b30bcf6d4d40488682a851d374fe2, type: 3}
   m_assetPrefab: {fileID: 265924371622490950, guid: 2c5c53b38deb93641a480bb1edb62f59, type: 3}

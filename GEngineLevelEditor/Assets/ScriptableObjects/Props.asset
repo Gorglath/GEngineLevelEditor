@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5309d94da0bb8646b8fa6e35029c827, type: 3}
   m_Name: Props
   m_EditorClassIdentifier: 
-  m_assetGroupIcon: {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea, type: 3}
+  m_assetGroupIcon: {fileID: 21300000, guid: a81a232104543b242878af3151233b99, type: 3}
   m_groupAssetTiles:
   - {fileID: 11400000, guid: d0edf7956f5ba82489be6800fa996b62, type: 2}

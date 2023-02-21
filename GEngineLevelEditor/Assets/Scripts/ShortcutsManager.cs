@@ -13,6 +13,7 @@ public class ShortcutsManager : MonoBehaviour
     [SerializeField] private string m_vActionName = null;
     [SerializeField] private string m_dActionName = null;
     [SerializeField] private string m_sActionName = null;
+    [SerializeField] private string m_fActionName = null;
 
     //helpers
     private Vector3 m_currentlyCopiedObjectPosition = Vector3.zero;
@@ -27,6 +28,7 @@ public class ShortcutsManager : MonoBehaviour
     private bool m_isPressingC = false;
     private bool m_isPressingV = false;
     private bool m_isPressingS = false;
+    private bool m_isPressingF = false;
     public void UpdateShortcutManager(PlayerInput playerInput)
     {
         UpdateInputs(playerInput);
@@ -35,6 +37,9 @@ public class ShortcutsManager : MonoBehaviour
 
     private void UpdateShortcuts()
     {
+        if (m_isPressingF)
+            FocusOnObject();
+
         if (!m_isPressingCtrl)
             return;
 
@@ -58,8 +63,20 @@ public class ShortcutsManager : MonoBehaviour
         m_isPressingS = playerInput.actions[m_sActionName].WasPressedThisFrame();
         m_isPressingV = playerInput.actions[m_vActionName].WasPressedThisFrame();
         m_isPressingD = playerInput.actions[m_dActionName].WasPressedThisFrame();
+        m_isPressingF = playerInput.actions[m_fActionName].WasPressedThisFrame();
     }
 
+    private void FocusOnObject()
+    {
+        if (!m_currentlySelectedObject)
+            return;
+        
+        Vector3 newPos = m_currentlySelectedObject.transform.position - Vector3.forward * 10;
+        newPos += Vector3.up * 10;
+        Camera.main.transform.position = newPos;
+        Camera.main.transform.rotation = Quaternion.LookRotation(m_currentlySelectedObject.transform.position - newPos);
+        
+    }
     public void UpdateSelection(Transform newObject)
     {
         if (!newObject)

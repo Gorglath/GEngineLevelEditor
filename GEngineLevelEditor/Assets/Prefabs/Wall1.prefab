@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7705523859865304580}
   - component: {fileID: 5118504280701718421}
   - component: {fileID: 3376418681550166119}
-  - component: {fileID: 6729868354581807554}
   - component: {fileID: 2897888311041585115}
+  - component: {fileID: 4482660740377350116}
   m_Layer: 0
   m_Name: Wall1
   m_TagString: Untagged
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6729868354581807554
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919888177117482588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2897888311041585115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +105,16 @@ MonoBehaviour:
   m_scoreAmount: 10
   m_ammoCount: 10
   m_lifeCount: 1
+--- !u!65 &4482660740377350116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919888177117482588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

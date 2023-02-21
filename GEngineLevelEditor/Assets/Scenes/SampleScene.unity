@@ -341,12 +341,12 @@ MonoBehaviour:
   m_levelParentTransform: {fileID: 1136647413}
   m_buttonPrefab: {fileID: 8615661711820659190, guid: 9498391fc2977cb4da36f5424a40cf60, type: 3}
   m_assetGroupToSpawn:
-  - {fileID: 11400000, guid: 188a8c8e1aaec47489ae30fbb76c551e, type: 2}
-  - {fileID: 11400000, guid: fa1199ada052eed4da360c8caacdd703, type: 2}
-  - {fileID: 11400000, guid: e623e4f751c227540989c1e8ceedd020, type: 2}
-  - {fileID: 11400000, guid: 11c17ee7f5548cd4897f69ee1e3dd1ea, type: 2}
-  - {fileID: 11400000, guid: cb7db82a4f8cb1246904b6ec0ce4ab0b, type: 2}
   - {fileID: 11400000, guid: c947cbb25ffbb674b8b490f53c7324e1, type: 2}
+  - {fileID: 11400000, guid: fa1199ada052eed4da360c8caacdd703, type: 2}
+  - {fileID: 11400000, guid: 188a8c8e1aaec47489ae30fbb76c551e, type: 2}
+  - {fileID: 11400000, guid: 11c17ee7f5548cd4897f69ee1e3dd1ea, type: 2}
+  - {fileID: 11400000, guid: e623e4f751c227540989c1e8ceedd020, type: 2}
+  - {fileID: 11400000, guid: cb7db82a4f8cb1246904b6ec0ce4ab0b, type: 2}
 --- !u!1 &156712930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4630,7 +4630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a5b54290cd3b141847d4d6e73c68b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelParent: {fileID: 0}
+  m_levelParent: {fileID: 1136647413}
+  m_assetManger: {fileID: 144597535}
 --- !u!1 &1099441518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5034,7 +5035,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136647412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6401,6 +6402,7 @@ MonoBehaviour:
   m_vActionName: V
   m_dActionName: D
   m_sActionName: S
+  m_fActionName: F
 --- !u!1 &1393267712
 GameObject:
   m_ObjectHideFlags: 0

@@ -112,4 +112,141 @@ public class AssetManager : MonoBehaviour
     {
         m_currentlySelectedObject = null;
     }
+
+    public GameObject GetObjectPrefab(EDescentObjectType objectType, EDescentEnemyType enemyType = EDescentEnemyType.NONE
+        , EDescentPickupType pickupType = EDescentPickupType.NONE, EDescentObstacleType obstacleType = EDescentObstacleType.NONE
+        , EDescentWallType wallType = EDescentWallType.NONE, EDescentFloorType floorType = EDescentFloorType.NONE
+        , EDescentPropType propType = EDescentPropType.NONE)
+    {
+        switch (objectType)
+        {
+            case EDescentObjectType.NONE:
+                return null;
+            case EDescentObjectType.WALL:
+                return GetWallPrefab(wallType);
+            case EDescentObjectType.FLOOR:
+                return GetFloorPrefab(floorType);
+            case EDescentObjectType.ENEMY:
+                return GetEnemyPrefab(enemyType);
+            case EDescentObjectType.PICKUP:
+                return GetPickupPrefab(pickupType);
+            case EDescentObjectType.OBSTACLE:
+                return GetObstaclePrefab(obstacleType);
+            case EDescentObjectType.PROP:
+                return GetPropPrefab(propType);
+            default:
+                return null;
+        }
+    }
+    private GameObject GetPropPrefab(EDescentPropType propType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if (m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType
+                != EDescentObjectType.PROP)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_propType
+                    == propType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject GetWallPrefab(EDescentWallType wallType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if(m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType 
+                != EDescentObjectType.WALL)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_wallType
+                    == wallType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject GetFloorPrefab(EDescentFloorType floorType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if (m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType
+                != EDescentObjectType.FLOOR)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_floorType
+                    == floorType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
+    private GameObject GetEnemyPrefab(EDescentEnemyType enemyType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if (m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType
+                != EDescentObjectType.ENEMY)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_enemyType
+                    == enemyType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
+    private GameObject GetPickupPrefab(EDescentPickupType pickupType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if (m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType
+                != EDescentObjectType.PICKUP)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_pickupType
+                    == pickupType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject GetObstaclePrefab(EDescentObstacleType obstacleType)
+    {
+        for (int i = 0; i < m_assetGroupToSpawn.Length; i++)
+        {
+            if (m_assetGroupToSpawn[i].m_groupAssetTiles[0].m_assetPrefab.GetComponent<DescentObjectType>().m_objectType
+                != EDescentObjectType.OBSTACLE)
+                continue;
+
+            for (int j = 0; j < m_assetGroupToSpawn[i].m_groupAssetTiles.Length; j++)
+            {
+                if (m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab.GetComponent<DescentObjectType>().m_obstacleType
+                    == obstacleType)
+                    return m_assetGroupToSpawn[i].m_groupAssetTiles[j].m_assetPrefab;
+            }
+        }
+
+        return null;
+    }
 }

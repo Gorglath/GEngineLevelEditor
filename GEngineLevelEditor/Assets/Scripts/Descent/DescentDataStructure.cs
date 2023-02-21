@@ -25,6 +25,23 @@ public struct DescentPickupDataStruct
 }
 
 [System.Serializable]
+public struct DescentWallDataStruct
+{
+    public string m_wallType;
+}
+
+[System.Serializable]
+public struct DescentFloorDataStruct
+{
+    public string m_floorType;
+}
+
+[System.Serializable]
+public struct DescentPropDataStruct
+{
+    public string m_propType;
+}
+[System.Serializable]
 public struct DescentObstacleDataStruct
 {
     public string m_obstacleType;
