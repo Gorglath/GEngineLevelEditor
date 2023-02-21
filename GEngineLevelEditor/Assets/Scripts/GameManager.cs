@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GizmosManager m_gizmosManager = null;
     [SerializeField] private UIManager m_uiManager = null;
     [SerializeField] private AssetManager m_assetManager = null;
+    [SerializeField] private ShortcutsManager m_shortcutsManager = null;
 
     [Space(20.0f)]
 
@@ -28,12 +29,21 @@ public class GameManager : MonoBehaviour
 
     private void UpdateManagersCommunication()
     {
+        if(m_shortcutsManager.GetDidCreateNewObject())
+        {
+            m_selectionManager.SelectObject(m_shortcutsManager.GetNewlyCreatedObject());
+            m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
+            m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
+            m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
+            m_assetManager.UpdateSelectedObject(m_selectionManager.GetCurrentlySelectedObject());
+        }
         if(m_assetManager.GetDidSpawnNewObject())
         {
             m_selectionManager.SelectObject(m_assetManager.GetNewlySpawnedObject());
             m_gizmosManager.UpdateGizmosLocation(m_selectionManager.GetCurrentlySelectedObject());
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
             m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
+            m_shortcutsManager.UpdateSelection(m_selectionManager.GetCurrentlySelectedObject());
             return;
         }
         if (m_uiManager.GetIsSelectingUI())
@@ -46,6 +56,7 @@ public class GameManager : MonoBehaviour
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
             m_assetManager.UpdateSelectedObject(m_selectionManager.GetCurrentlySelectedObject());
             m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
+            m_shortcutsManager.UpdateSelection(m_selectionManager.GetCurrentlySelectedObject());
             return;
         }
         else
@@ -56,6 +67,7 @@ public class GameManager : MonoBehaviour
                 m_gizmosManager.UnselectedObject();
                 m_assetManager.ResetSelectedObject();
                 m_descentUIDataManager.RemoveObjectUIData();
+                m_shortcutsManager.RemoveSelection();
             }
         }
 
@@ -84,6 +96,11 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateManagers()
     {
+        if (!m_shortcutsManager)
+            return;
+
+        m_shortcutsManager.UpdateShortcutManager(m_playerInput);
+
         if (!m_descentUIDataManager)
             return;
 

@@ -16,18 +16,15 @@ public struct TransformStruct
 }
 public class DataManager : MonoBehaviour
 {
-    [SerializeField] private Transform parent = null;
-    public void Start()
-    {
-        SaveLevel(parent,EGameType.DESCENT);
-    }
-    public void SaveLevel(Transform levelParent, EGameType gameType)
+    [Header("References")]
+    [SerializeField] private Transform m_levelParent = null;
+    public void SaveLevel(EGameType gameType)
     {
         string saveData = "";
         if (gameType == EGameType.DESCENT)
-            saveData = SaveDescentLevel(levelParent);
+            saveData = SaveDescentLevel(m_levelParent);
 
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/Level1.json", saveData);
+        System.IO.File.WriteAllText(Application.dataPath + "/Level1.json", saveData);
     }
 
     private string SaveDescentLevel(Transform levelParent)

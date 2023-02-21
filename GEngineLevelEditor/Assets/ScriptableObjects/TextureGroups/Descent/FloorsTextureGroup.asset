@@ -17,6 +17,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
   - {fileID: 21300000, guid: f9161c6c9e06dc445ada3ee16d991f90, type: 3}
   m_textureGroup:
-  - {fileID: 2800000, guid: d24e7e0b75e1a244bb9687d6fd4315ef, type: 3}
-  - {fileID: 2800000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
-  - {fileID: 2800000, guid: f9161c6c9e06dc445ada3ee16d991f90, type: 3}
+  - {fileID: 2800000, guid: e78553ca08514154d94b53dc4808615d, type: 3}
+  - {fileID: 2800000, guid: c27b6fdb2cfa4bc4db35794b4a9ccb35, type: 3}
+  - {fileID: 2800000, guid: 1aa8921fa39b1264d817b2db0da651fa, type: 3}
