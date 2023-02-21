@@ -32,6 +32,17 @@ public class DropdownImageLinker : MonoBehaviour
     //helpers
     private Texture m_selectedWallTexture = null;
     private Texture m_selectedFloorTexture = null;
+    private bool m_didSwitchWallTexture = false;
+    private bool m_didSwitchFloorTexture = false;
+
+    public bool GetDidSwitchWallTexture() { return m_didSwitchWallTexture; }
+    public bool GetDidSwitchFloorTexture() { return m_didSwitchFloorTexture; }
+
+    public void ResetDidSwitchWallTexture() { m_didSwitchWallTexture = false; }
+    public void ResetDidSwitchFloorTexture() { m_didSwitchFloorTexture = false; }
+
+    public Texture GetCurrentWallTexture() { return m_selectedWallTexture; }
+    public Texture GetCurrentFloorTexture() { return m_selectedFloorTexture; }
     public void InitializeTextureGroups()
     {
         if (!m_wallPanelDropdown)
@@ -56,6 +67,7 @@ public class DropdownImageLinker : MonoBehaviour
 
         m_selectedWallTexture = m_wallTextureGroup.m_textureGroup[dropdown.value];
         m_wallPanelImage.texture = m_selectedWallTexture;
+        m_didSwitchWallTexture = true;
     }
 
     public void ChangeFloorImageType(TMP_Dropdown dropdown)
@@ -65,5 +77,6 @@ public class DropdownImageLinker : MonoBehaviour
 
         m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[dropdown.value];
         m_floorPanelImage.texture = m_selectedFloorTexture;
+        m_didSwitchFloorTexture = true;
     }
 }

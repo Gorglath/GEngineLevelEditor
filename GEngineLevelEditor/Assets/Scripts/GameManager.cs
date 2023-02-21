@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateManagers()
     {
+        if (!m_descentUIDataManager)
+            return;
+
+        m_descentUIDataManager.UpdateDescentDataUIManager();
+
         if (!m_cameraManager)
             return;
 
