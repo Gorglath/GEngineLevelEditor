@@ -63,10 +63,13 @@ public class DescentObjectType : MonoBehaviour
     public EDescentFloorType m_floorType = EDescentFloorType.NONE;
     public EDescentWallType m_wallType = EDescentWallType.NONE;
     public EDescentPropType m_propType = EDescentPropType.NONE;
+    [Space(20.0f)]
     public int m_enemyHealth = 10;
     public int m_scoreAmount = 10;
     public int m_ammoCount = 10;
     public int m_lifeCount = 1;
+    [Space(20.0f)]
     public int m_wallTextureIndex = -1;
     public int m_floorTextureIndex = -1;
+    public int m_enemyTypeIndex = -1;
 }

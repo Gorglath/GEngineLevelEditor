@@ -17,14 +17,16 @@ public class DescentDataUIManager : MonoBehaviour
     [SerializeField] private GameObject m_ammoPickableDataPanel = null;
     [SerializeField] private GameObject m_hostagePickableDataPanel = null;
     [Space(20.0f)]
-    [SerializeField] private DropdownImageLinker m_DropdownImageLinker = null;
+    [SerializeField] private DropdownImageLinker m_dropdownImageLinker = null;
+    [SerializeField] private DescentEnemyLinker m_descentEnemyLinker = null;
     //helpers
     private GameObject m_previouslyActiveDataPanel = null;
     private DescentObjectType m_currentlySelectedObject = null;
     bool m_didSelectNewObject = false;
     private void Start()
     {
-      m_DropdownImageLinker.InitializeTextureGroups();
+      m_dropdownImageLinker.InitializeTextureGroups();
+        m_descentEnemyLinker.InitializeDropDown();
     }
     public void RemoveObjectUIData()
     {
@@ -64,29 +66,46 @@ public class DescentDataUIManager : MonoBehaviour
 
         if (m_currentlySelectedObject.m_objectType == EDescentObjectType.WALL)
         {
-            if (m_DropdownImageLinker.GetDidSwitchWallTexture() ||
-                (m_didSelectNewObject && m_currentlySelectedObject.GetComponent<DescentObjectType>().m_wallTextureIndex == -1))
+            if (m_dropdownImageLinker.GetDidSwitchWallTexture() ||
+                (m_didSelectNewObject && m_currentlySelectedObject.m_wallTextureIndex == -1))
             {
                 m_didSelectNewObject = false;
                 m_currentlySelectedObject.GetComponent<MeshRenderer>().material.SetTexture
-                    ("_MainTex", m_DropdownImageLinker.GetCurrentWallTexture());
+                    ("_MainTex", m_dropdownImageLinker.GetCurrentWallTexture());
 
-                m_currentlySelectedObject.GetComponent<DescentObjectType>().m_wallTextureIndex = m_DropdownImageLinker.GetCurrentWallTextureIndex();
-                m_DropdownImageLinker.ResetDidSwitchWallTexture();
+                m_currentlySelectedObject.m_wallTextureIndex = m_dropdownImageLinker.GetCurrentWallTextureIndex();
+                m_dropdownImageLinker.ResetDidSwitchWallTexture();
             }
         }
 
         if (m_currentlySelectedObject.m_objectType == EDescentObjectType.FLOOR)
         {
-            if (m_DropdownImageLinker.GetDidSwitchFloorTexture() || 
-                (m_didSelectNewObject && m_currentlySelectedObject.GetComponent<DescentObjectType>().m_floorTextureIndex == -1))
+            if (m_dropdownImageLinker.GetDidSwitchFloorTexture() || 
+                (m_didSelectNewObject && m_currentlySelectedObject.m_floorTextureIndex == -1))
             {
                 m_didSelectNewObject = false;
                 m_currentlySelectedObject.GetComponent<MeshRenderer>().material.SetTexture
-                    ("_MainTex", m_DropdownImageLinker.GetCurrentFloorTexture());
+                    ("_MainTex", m_dropdownImageLinker.GetCurrentFloorTexture());
 
-                m_currentlySelectedObject.GetComponent<DescentObjectType>().m_floorTextureIndex = m_DropdownImageLinker.GetCurrentFloorTextureIndex();
-                m_DropdownImageLinker.ResetDidSwitchFloorTexture();
+                m_currentlySelectedObject.m_floorTextureIndex = m_dropdownImageLinker.GetCurrentFloorTextureIndex();
+                m_dropdownImageLinker.ResetDidSwitchFloorTexture();
+            }
+        }
+
+        if(m_currentlySelectedObject.m_objectType == EDescentObjectType.ENEMY)
+        {
+            if (m_descentEnemyLinker.GetDidChangeEnemyType()
+                || (m_didSelectNewObject && m_currentlySelectedObject.m_enemyTypeIndex == -1))
+            {
+                m_didSelectNewObject = false;
+                m_currentlySelectedObject.m_enemyTypeIndex = m_descentEnemyLinker.GetSelectedEnemyTypeIndex();
+                m_currentlySelectedObject.m_enemyType = m_descentEnemyLinker.GetNewEnemyType();
+            }
+            else if(m_descentEnemyLinker.GetDidChangeHealth()
+                || (m_didSelectNewObject && m_currentlySelectedObject.m_enemyHealth == -1))
+            {
+                m_didSelectNewObject = false;
+                m_currentlySelectedObject.m_enemyHealth = (int)m_descentEnemyLinker.GetNewEnemyHealth();
             }
         }
     }
@@ -95,12 +114,13 @@ public class DescentDataUIManager : MonoBehaviour
         switch (descentObjectType.m_objectType)
         {
             case EDescentObjectType.WALL:
-                m_DropdownImageLinker.SetSelectedWallTextureIndex(descentObjectType.m_wallTextureIndex);
+                m_dropdownImageLinker.SetSelectedWallTextureIndex(descentObjectType.m_wallTextureIndex);
                 return m_wallDataPanel;
             case EDescentObjectType.FLOOR:
-                m_DropdownImageLinker.SetSelectedFloorTextureIndex(descentObjectType.m_floorTextureIndex);
+                m_dropdownImageLinker.SetSelectedFloorTextureIndex(descentObjectType.m_floorTextureIndex);
                 return m_floorDataPanel;
             case EDescentObjectType.ENEMY:
+                m_descentEnemyLinker.SetSelectedObjectEnemyType(descentObjectType.m_enemyTypeIndex,descentObjectType.m_enemyHealth);
                 return m_enemyDataPanel;
             case EDescentObjectType.PICKUP:
                 switch (descentObjectType.m_pickupType)

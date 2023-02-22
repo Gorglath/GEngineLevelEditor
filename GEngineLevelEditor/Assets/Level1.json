@@ -160,4 +160,116 @@
     "m_floorType": "NORMAL",
     "m_textureId": 2
 }
+={
+    "m_objectType": "ENEMY",
+    "m_id": 6
+}
+~
+{
+    "m_location": {
+        "x": 16.51788330078125,
+        "y": 42.17273712158203,
+        "z": -8.173526763916016
+    },
+    "m_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
+~
+{
+    "m_enemyType": "NORMAL",
+    "m_enemyHealth": 81,
+    "m_enemyTypeIndex": 1
+}
+={
+    "m_objectType": "ENEMY",
+    "m_id": 7
+}
+~
+{
+    "m_location": {
+        "x": 16.51788330078125,
+        "y": 42.17273712158203,
+        "z": -11.019270896911621
+    },
+    "m_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
+~
+{
+    "m_enemyType": "FAST",
+    "m_enemyHealth": 39,
+    "m_enemyTypeIndex": 2
+}
+={
+    "m_objectType": "ENEMY",
+    "m_id": 8
+}
+~
+{
+    "m_location": {
+        "x": 16.51788330078125,
+        "y": 42.17273712158203,
+        "z": -6.3391032218933109
+    },
+    "m_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
+~
+{
+    "m_enemyType": "BURST",
+    "m_enemyHealth": 169,
+    "m_enemyTypeIndex": 3
+}
+={
+    "m_objectType": "ENEMY",
+    "m_id": 9
+}
+~
+{
+    "m_location": {
+        "x": 12.138096809387207,
+        "y": 42.17273712158203,
+        "z": -6.3391032218933109
+    },
+    "m_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
+~
+{
+    "m_enemyType": "BOSS",
+    "m_enemyHealth": 7,
+    "m_enemyTypeIndex": 4
+}
 =

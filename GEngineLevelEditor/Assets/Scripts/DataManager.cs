@@ -107,6 +107,7 @@ public class DataManager : MonoBehaviour
                 case EDescentObjectType.ENEMY:
                     enemyStruct.m_enemyType = objectType.m_enemyType.ToString();
                     enemyStruct.m_enemyHealth = objectType.m_enemyHealth;
+                    enemyStruct.m_enemyTypeIndex = objectType.m_enemyTypeIndex;
 
                     saveData += JsonUtility.ToJson(enemyStruct,true);
                     break;
@@ -183,6 +184,11 @@ public class DataManager : MonoBehaviour
                 objectType.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", m_dropdownLinker.GetFloorTexture(floorStruct.m_textureId));
                 break;
             case EDescentObjectType.ENEMY:
+                DescentEnemyDataStruct enemyStruct = JsonUtility.FromJson<DescentEnemyDataStruct>(saveData);
+
+                objectType.m_enemyType = Enum.Parse<EDescentEnemyType>(enemyStruct.m_enemyType);
+                objectType.m_enemyHealth = enemyStruct.m_enemyHealth;
+                objectType.m_enemyTypeIndex = enemyStruct.m_enemyTypeIndex;
                 break;
             case EDescentObjectType.PLAYER:
                 break;

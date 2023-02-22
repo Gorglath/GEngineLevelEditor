@@ -97,6 +97,7 @@ public class DropdownImageLinker : MonoBehaviour
 
         m_selectedWallTexture = m_wallTextureGroup.m_textureGroup[index];
         m_wallPanelImage.texture = m_selectedWallTexture;
+        m_wallPanelDropdown.SetValueWithoutNotify(index);
     }
 
     public void SetSelectedFloorTextureIndex(int index)
@@ -106,5 +107,6 @@ public class DropdownImageLinker : MonoBehaviour
 
         m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[index];
         m_floorPanelImage.texture = m_selectedFloorTexture;
+        m_floorTextureDropdown.SetValueWithoutNotify(index);
     }
 }

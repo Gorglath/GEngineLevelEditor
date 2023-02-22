@@ -13,6 +13,7 @@ public struct DescentEnemyDataStruct
 {
     public string m_enemyType;
     public int m_enemyHealth;
+    public int m_enemyTypeIndex;
 }
 
 [System.Serializable]
