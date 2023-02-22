@@ -6397,6 +6397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dataManager: {fileID: 1092696847}
+  m_deleteActionName: Delete
   m_ctrlDownActionName: Ctrl
   m_cActionName: C
   m_vActionName: V

@@ -7,7 +7,9 @@ public class ShortcutsManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private DataManager m_dataManager = null;
+    
     [Header("Parameters")]
+    [SerializeField] private string m_deleteActionName = null;
     [SerializeField] private string m_ctrlDownActionName = null;
     [SerializeField] private string m_cActionName = null;
     [SerializeField] private string m_vActionName = null;
@@ -23,12 +25,14 @@ public class ShortcutsManager : MonoBehaviour
     private GameObject m_currentlySelectedObject = null;
     private GameObject m_newlyCreatedObject = null;
     private bool m_didCreateNewObject = false;
+    private bool m_didDeleteSelectedObject = false;
     private bool m_isPressingCtrl = false;
     private bool m_isPressingD = false;
     private bool m_isPressingC = false;
     private bool m_isPressingV = false;
     private bool m_isPressingS = false;
     private bool m_isPressingF = false;
+    private bool m_isPressingDelete = false;
     public void UpdateShortcutManager(PlayerInput playerInput)
     {
         UpdateInputs(playerInput);
@@ -39,6 +43,9 @@ public class ShortcutsManager : MonoBehaviour
     {
         if (m_isPressingF)
             FocusOnObject();
+
+        if (m_isPressingDelete)
+            DeleteSelectedObject();
 
         if (!m_isPressingCtrl)
             return;
@@ -64,8 +71,17 @@ public class ShortcutsManager : MonoBehaviour
         m_isPressingV = playerInput.actions[m_vActionName].WasPressedThisFrame();
         m_isPressingD = playerInput.actions[m_dActionName].WasPressedThisFrame();
         m_isPressingF = playerInput.actions[m_fActionName].WasPressedThisFrame();
+        m_isPressingDelete = playerInput.actions[m_deleteActionName].WasPressedThisFrame();
     }
 
+    private void DeleteSelectedObject()
+    {
+        if (!m_currentlySelectedObject)
+            return;
+
+        Destroy(m_currentlySelectedObject);
+        m_didDeleteSelectedObject = true;
+    }
     private void FocusOnObject()
     {
         if (!m_currentlySelectedObject)
@@ -138,6 +154,13 @@ public class ShortcutsManager : MonoBehaviour
     {
         bool value = m_didCreateNewObject;
         m_didCreateNewObject = false;
+        return value;
+    }
+
+    public bool GetDidDeleteSelectedObject()
+    {
+        bool value = m_didDeleteSelectedObject;
+        m_didDeleteSelectedObject = false;
         return value;
     }
 }

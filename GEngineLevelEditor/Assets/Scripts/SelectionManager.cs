@@ -25,6 +25,11 @@ public class SelectionManager : MonoBehaviour
         UpdateObjectSelection(playerInput);
     }
 
+    public void UnselectObject()
+    {
+        m_didSelectNewObject = false;
+        m_currentlySelectedObject = null;
+    }
     public void SelectObject(Transform objectToSelect)
     {
         m_currentlySelectedObject = objectToSelect;

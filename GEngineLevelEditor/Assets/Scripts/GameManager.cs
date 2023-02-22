@@ -36,6 +36,17 @@ public class GameManager : MonoBehaviour
             m_uiManager.SelectedNewObject(m_selectionManager.GetCurrentlySelectedObject());
             m_descentUIDataManager.DisplayObjectUIData(m_selectionManager.GetCurrentlySelectedObject());
             m_assetManager.UpdateSelectedObject(m_selectionManager.GetCurrentlySelectedObject());
+            return;
+        }
+
+        if(m_shortcutsManager.GetDidDeleteSelectedObject())
+        {
+            m_selectionManager.UnselectObject();
+            m_uiManager.UnselectedObject();
+            m_gizmosManager.UnselectedObject();
+            m_assetManager.ResetSelectedObject();
+            m_descentUIDataManager.RemoveObjectUIData();
+            return;
         }
         if(m_assetManager.GetDidSpawnNewObject())
         {
