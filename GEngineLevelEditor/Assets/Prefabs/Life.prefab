@@ -113,8 +113,13 @@ MonoBehaviour:
   m_objectType: 5
   m_enemyType: 0
   m_obstacleType: 0
-  m_pickupType: 0
+  m_pickupType: 2
+  m_floorType: 0
+  m_wallType: 0
+  m_propType: 0
   m_enemyHealth: 10
   m_scoreAmount: 10
   m_ammoCount: 10
   m_lifeCount: 1
+  m_wallTextureIndex: -1
+  m_floorTextureIndex: -1

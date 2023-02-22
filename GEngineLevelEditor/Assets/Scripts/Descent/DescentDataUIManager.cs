@@ -64,24 +64,28 @@ public class DescentDataUIManager : MonoBehaviour
 
         if (m_currentlySelectedObject.m_objectType == EDescentObjectType.WALL)
         {
-            if (m_DropdownImageLinker.GetDidSwitchWallTexture() || m_didSelectNewObject)
+            if (m_DropdownImageLinker.GetDidSwitchWallTexture() ||
+                (m_didSelectNewObject && m_currentlySelectedObject.GetComponent<DescentObjectType>().m_wallTextureIndex == -1))
             {
                 m_didSelectNewObject = false;
                 m_currentlySelectedObject.GetComponent<MeshRenderer>().material.SetTexture
                     ("_MainTex", m_DropdownImageLinker.GetCurrentWallTexture());
 
+                m_currentlySelectedObject.GetComponent<DescentObjectType>().m_wallTextureIndex = m_DropdownImageLinker.GetCurrentWallTextureIndex();
                 m_DropdownImageLinker.ResetDidSwitchWallTexture();
             }
         }
 
         if (m_currentlySelectedObject.m_objectType == EDescentObjectType.FLOOR)
         {
-            if (m_DropdownImageLinker.GetDidSwitchFloorTexture() || m_didSelectNewObject)
+            if (m_DropdownImageLinker.GetDidSwitchFloorTexture() || 
+                (m_didSelectNewObject && m_currentlySelectedObject.GetComponent<DescentObjectType>().m_floorTextureIndex == -1))
             {
                 m_didSelectNewObject = false;
                 m_currentlySelectedObject.GetComponent<MeshRenderer>().material.SetTexture
                     ("_MainTex", m_DropdownImageLinker.GetCurrentFloorTexture());
 
+                m_currentlySelectedObject.GetComponent<DescentObjectType>().m_floorTextureIndex = m_DropdownImageLinker.GetCurrentFloorTextureIndex();
                 m_DropdownImageLinker.ResetDidSwitchFloorTexture();
             }
         }

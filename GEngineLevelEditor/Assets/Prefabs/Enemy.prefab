@@ -111,10 +111,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectType: 3
-  m_enemyType: 0
+  m_enemyType: 1
   m_obstacleType: 0
   m_pickupType: 3
+  m_floorType: 0
+  m_wallType: 0
+  m_propType: 0
   m_enemyHealth: 10
   m_scoreAmount: 757
   m_ammoCount: 1
   m_lifeCount: 1
+  m_wallTextureIndex: -1
+  m_floorTextureIndex: -1

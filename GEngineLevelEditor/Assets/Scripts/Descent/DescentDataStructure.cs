@@ -28,12 +28,14 @@ public struct DescentPickupDataStruct
 public struct DescentWallDataStruct
 {
     public string m_wallType;
+    public int m_textureId;
 }
 
 [System.Serializable]
 public struct DescentFloorDataStruct
 {
     public string m_floorType;
+    public int m_textureId;
 }
 
 [System.Serializable]

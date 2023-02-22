@@ -19,6 +19,8 @@ public class DataManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform m_levelParent = null;
     [SerializeField] private AssetManager m_assetManger = null;
+    [SerializeField] private DropdownImageLinker m_dropdownLinker = null;
+
     private void Start()
     {
         LoadLevel(EGameType.DESCENT);
@@ -87,11 +89,13 @@ public class DataManager : MonoBehaviour
             {
                 case EDescentObjectType.WALL:
                     wallStruct.m_wallType = objectType.m_wallType.ToString();
+                    wallStruct.m_textureId = objectType.m_wallTextureIndex;
 
                     saveData += JsonUtility.ToJson(wallStruct, true);
                     break;
                 case EDescentObjectType.FLOOR:
                     floorStruct.m_floorType = objectType.m_floorType.ToString();
+                    floorStruct.m_textureId = objectType.m_floorTextureIndex;
 
                     saveData += JsonUtility.ToJson(floorStruct, true);
                     break;
@@ -142,13 +146,54 @@ public class DataManager : MonoBehaviour
 
             GameObject objectRef = GetObjectPrefab(objectType,objectComponents[2]);
             if (!objectRef)
-                return;
+                continue;
 
             GameObject instanceRef = Instantiate(objectRef, m_levelParent);
 
             instanceRef.transform.position = objectTransformStruct.m_location;
             instanceRef.transform.eulerAngles = objectTransformStruct.m_rotation;
             instanceRef.transform.localScale = objectTransformStruct.m_scale;
+
+            SetCreatedObjectSavedParameters(instanceRef, objectComponents[2]);
+        }
+    }
+    private void SetCreatedObjectSavedParameters(GameObject instancedObject, string saveData)
+    {
+        DescentObjectType objectType = instancedObject.GetComponent<DescentObjectType>();
+
+        if (!objectType)
+            return;
+
+        switch (objectType.m_objectType)
+        {
+            case EDescentObjectType.WALL:
+                DescentWallDataStruct wallStruct = JsonUtility.FromJson<DescentWallDataStruct>(saveData);
+                
+                objectType.m_wallType = Enum.Parse<EDescentWallType>(wallStruct.m_wallType);
+                objectType.m_wallTextureIndex = wallStruct.m_textureId;
+                objectType.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", m_dropdownLinker.GetWallTexture(wallStruct.m_textureId));
+
+                break;
+            case EDescentObjectType.FLOOR:
+                DescentFloorDataStruct floorStruct = JsonUtility.FromJson<DescentFloorDataStruct>(saveData);
+
+                objectType.m_floorType = Enum.Parse<EDescentFloorType>(floorStruct.m_floorType);
+                objectType.m_floorTextureIndex = floorStruct.m_textureId;
+
+                objectType.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", m_dropdownLinker.GetFloorTexture(floorStruct.m_textureId));
+                break;
+            case EDescentObjectType.ENEMY:
+                break;
+            case EDescentObjectType.PLAYER:
+                break;
+            case EDescentObjectType.PICKUP:
+                break;
+            case EDescentObjectType.OBSTACLE:
+                break;
+            case EDescentObjectType.PROP:
+                break;
+            default:
+                break;
         }
     }
     private GameObject GetObjectPrefab(EDescentObjectType objectType,string objectComponent)

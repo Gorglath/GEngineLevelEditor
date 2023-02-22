@@ -34,6 +34,8 @@ public class DropdownImageLinker : MonoBehaviour
     private Texture m_selectedFloorTexture = null;
     private bool m_didSwitchWallTexture = false;
     private bool m_didSwitchFloorTexture = false;
+    private int m_currentWallTextureIndex = 0;
+    private int m_currentFloorTextureIndex = 0;
 
     public bool GetDidSwitchWallTexture() { return m_didSwitchWallTexture; }
     public bool GetDidSwitchFloorTexture() { return m_didSwitchFloorTexture; }
@@ -41,8 +43,12 @@ public class DropdownImageLinker : MonoBehaviour
     public void ResetDidSwitchWallTexture() { m_didSwitchWallTexture = false; }
     public void ResetDidSwitchFloorTexture() { m_didSwitchFloorTexture = false; }
 
+    public Texture GetWallTexture(int index) { return m_wallTextureGroup.m_textureGroup[index]; }
+    public Texture GetFloorTexture(int index) { return m_floorTextureGroup.m_textureGroup[index]; }
     public Texture GetCurrentWallTexture() { return m_selectedWallTexture; }
     public Texture GetCurrentFloorTexture() { return m_selectedFloorTexture; }
+    public int GetCurrentWallTextureIndex() { return m_currentWallTextureIndex; }
+    public int GetCurrentFloorTextureIndex() { return m_currentFloorTextureIndex; }
     public void InitializeTextureGroups()
     {
         if (!m_wallPanelDropdown)
@@ -65,6 +71,7 @@ public class DropdownImageLinker : MonoBehaviour
         if (!m_wallPanelImage)
             return;
 
+        m_currentWallTextureIndex = dropdown.value;
         m_selectedWallTexture = m_wallTextureGroup.m_textureGroup[dropdown.value];
         m_wallPanelImage.texture = m_selectedWallTexture;
         m_didSwitchWallTexture = true;
@@ -75,6 +82,7 @@ public class DropdownImageLinker : MonoBehaviour
         if (!m_floorPanelImage)
             return;
 
+        m_currentFloorTextureIndex = dropdown.value;
         m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[dropdown.value];
         m_floorPanelImage.texture = m_selectedFloorTexture;
         m_didSwitchFloorTexture = true;
