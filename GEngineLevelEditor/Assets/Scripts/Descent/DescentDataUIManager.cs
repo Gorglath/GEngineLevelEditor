@@ -95,8 +95,10 @@ public class DescentDataUIManager : MonoBehaviour
         switch (descentObjectType.m_objectType)
         {
             case EDescentObjectType.WALL:
+                m_DropdownImageLinker.SetSelectedWallTextureIndex(descentObjectType.m_wallTextureIndex);
                 return m_wallDataPanel;
             case EDescentObjectType.FLOOR:
+                m_DropdownImageLinker.SetSelectedFloorTextureIndex(descentObjectType.m_floorTextureIndex);
                 return m_floorDataPanel;
             case EDescentObjectType.ENEMY:
                 return m_enemyDataPanel;

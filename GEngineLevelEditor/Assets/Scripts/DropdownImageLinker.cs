@@ -56,14 +56,16 @@ public class DropdownImageLinker : MonoBehaviour
 
         m_wallPanelDropdown.AddOptions(m_wallTextureGroup.m_spriteGroup);
         m_wallPanelDropdown.onValueChanged.AddListener(delegate { ChangeWallImageType(m_wallPanelDropdown); });
-        ChangeWallImageType(m_wallPanelDropdown);
+        m_selectedWallTexture = m_wallTextureGroup.m_textureGroup[m_wallPanelDropdown.value];
+        m_wallPanelImage.texture = m_selectedWallTexture;
 
         if (!m_floorTextureDropdown)
             return;
 
         m_floorTextureDropdown.AddOptions(m_floorTextureGroup.m_spriteGroup);
         m_floorTextureDropdown.onValueChanged.AddListener(delegate { ChangeFloorImageType(m_floorTextureDropdown); });
-        ChangeFloorImageType(m_floorTextureDropdown);
+        m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[m_wallPanelDropdown.value];
+        m_floorPanelImage.texture = m_selectedFloorTexture;
     }
 
     public void ChangeWallImageType(TMP_Dropdown dropdown)
@@ -86,5 +88,23 @@ public class DropdownImageLinker : MonoBehaviour
         m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[dropdown.value];
         m_floorPanelImage.texture = m_selectedFloorTexture;
         m_didSwitchFloorTexture = true;
+    }
+
+    public void SetSelectedWallTextureIndex(int index)
+    {
+        if (index == -1)
+            return;
+
+        m_selectedWallTexture = m_wallTextureGroup.m_textureGroup[index];
+        m_wallPanelImage.texture = m_selectedWallTexture;
+    }
+
+    public void SetSelectedFloorTextureIndex(int index)
+    {
+        if (index == -1)
+            return;
+
+        m_selectedFloorTexture = m_floorTextureGroup.m_textureGroup[index];
+        m_floorPanelImage.texture = m_selectedFloorTexture;
     }
 }
