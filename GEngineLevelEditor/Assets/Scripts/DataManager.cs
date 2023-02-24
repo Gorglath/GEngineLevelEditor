@@ -99,7 +99,6 @@ public class DataManager : MonoBehaviour
 
                     saveData += JsonUtility.ToJson(floorStruct, true);
                     break;
-                    break;
                 case EDescentObjectType.ENEMY:
                     enemyStruct.m_enemyType = objectType.m_enemyType.ToString();
                     enemyStruct.m_enemyHealth = objectType.m_enemyHealth;
@@ -112,6 +111,7 @@ public class DataManager : MonoBehaviour
                     pickupStruct.m_scoreAmount = objectType.m_scoreAmount;
                     pickupStruct.m_lifeCount = objectType.m_lifeCount;
                     pickupStruct.m_ammoAmount = objectType.m_ammoCount;
+                    pickupStruct.m_pickupIndex = objectType.m_pickupTypeIndex;
 
                     saveData += JsonUtility.ToJson(pickupStruct,true);
                     break;
@@ -192,6 +192,13 @@ public class DataManager : MonoBehaviour
                 objectType.m_enemyTypeIndex = enemyStruct.m_enemyTypeIndex;
                 break;
             case EDescentObjectType.PICKUP:
+                DescentPickupDataStruct pickupStruct = JsonUtility.FromJson<DescentPickupDataStruct>(saveData);
+
+                objectType.m_pickupType = Enum.Parse<EDescentPickupType>(pickupStruct.m_pickupType);
+                objectType.m_pickupTypeIndex = pickupStruct.m_pickupIndex;
+                objectType.m_lifeCount = pickupStruct.m_lifeCount;
+                objectType.m_scoreAmount = pickupStruct.m_scoreAmount;
+                objectType.m_ammoCount = pickupStruct.m_ammoAmount;
                 break;
             case EDescentObjectType.OBSTACLE:
                 DescentObstacleDataStruct obstacleStruct = JsonUtility.FromJson<DescentObstacleDataStruct>(saveData);

@@ -20,6 +20,7 @@ public struct DescentEnemyDataStruct
 public struct DescentPickupDataStruct
 {
     public string m_pickupType;
+    public int m_pickupIndex;
     public int m_scoreAmount;
     public int m_lifeCount;
     public int m_ammoAmount;

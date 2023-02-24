@@ -10,23 +10,20 @@ public class DescentDataUIManager : MonoBehaviour
     [SerializeField] private GameObject m_floorDataPanel = null;
     [Space(20.0f)]
     [SerializeField] private GameObject m_enemyDataPanel = null;
-    [SerializeField] private GameObject m_obstacleDataPanel = null;
-    [Space(20.0f)]
-    [SerializeField] private GameObject m_lifePickableDataPanel = null;
-    [SerializeField] private GameObject m_scorePickableDataPanel = null;
-    [SerializeField] private GameObject m_ammoPickableDataPanel = null;
-    [SerializeField] private GameObject m_hostagePickableDataPanel = null;
+    [SerializeField] private GameObject m_pickupDataPanel = null;
     [Space(20.0f)]
     [SerializeField] private DropdownImageLinker m_dropdownImageLinker = null;
     [SerializeField] private DescentEnemyLinker m_descentEnemyLinker = null;
+    [SerializeField] private DescentPickupLinker m_descentPickupLinker = null;
     //helpers
     private GameObject m_previouslyActiveDataPanel = null;
     private DescentObjectType m_currentlySelectedObject = null;
     bool m_didSelectNewObject = false;
     private void Start()
     {
-      m_dropdownImageLinker.InitializeTextureGroups();
+        m_dropdownImageLinker.InitializeTextureGroups();
         m_descentEnemyLinker.InitializeDropDown();
+        m_descentPickupLinker.InitializeDropDown();
     }
     public void RemoveObjectUIData()
     {
@@ -108,6 +105,39 @@ public class DescentDataUIManager : MonoBehaviour
                 m_currentlySelectedObject.m_enemyHealth = (int)m_descentEnemyLinker.GetNewEnemyHealth();
             }
         }
+
+        if(m_currentlySelectedObject.m_objectType == EDescentObjectType.PICKUP)
+        {
+            if(m_descentPickupLinker.GetDidChangePickupType()
+                || (m_didSelectNewObject && m_currentlySelectedObject.m_pickupTypeIndex == -1))
+            {
+                m_didSelectNewObject = false;
+                m_currentlySelectedObject.m_pickupTypeIndex = m_descentPickupLinker.GetSelectedPickupTypeIndex();
+                m_currentlySelectedObject.m_pickupType = m_descentPickupLinker.GetNewPickupType();
+            }
+            else if(m_descentPickupLinker.GetDidChangeSlider()
+                || (m_didSelectNewObject && m_currentlySelectedObject.m_pickupTypeIndex == -1))
+            {
+                m_didSelectNewObject = false;
+                switch (m_currentlySelectedObject.m_pickupType)
+                {
+                    case EDescentPickupType.SCORE:
+                        m_currentlySelectedObject.m_scoreAmount = (int)m_descentPickupLinker.GetNewPickupValue();
+                        break;
+                    case EDescentPickupType.HEALTH:
+                        m_currentlySelectedObject.m_lifeCount = (int)m_descentPickupLinker.GetNewPickupValue();
+                        break;
+                    case EDescentPickupType.AMMO:
+                        m_currentlySelectedObject.m_ammoCount = (int)m_descentPickupLinker.GetNewPickupValue();
+                        break;
+                    case EDescentPickupType.HOSTAGE:
+                        m_currentlySelectedObject.m_scoreAmount = (int)m_descentPickupLinker.GetNewPickupValue();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
     private GameObject GetDataPanelToActivate(DescentObjectType descentObjectType)
     {
@@ -123,21 +153,9 @@ public class DescentDataUIManager : MonoBehaviour
                 m_descentEnemyLinker.SetSelectedObjectEnemyType(descentObjectType.m_enemyTypeIndex,descentObjectType.m_enemyHealth);
                 return m_enemyDataPanel;
             case EDescentObjectType.PICKUP:
-                switch (descentObjectType.m_pickupType)
-                {
-                    case EDescentPickupType.SCORE:
-                        return m_scorePickableDataPanel;
-                    case EDescentPickupType.HEALTH:
-                        return m_lifePickableDataPanel;
-                    case EDescentPickupType.AMMO:
-                        return m_ammoPickableDataPanel;
-                    case EDescentPickupType.HOSTAGE:
-                        return m_hostagePickableDataPanel;
-                    default:
-                        return null;
-                }
-            case EDescentObjectType.OBSTACLE:
-                return m_obstacleDataPanel;
+                m_descentPickupLinker.SetSelectedObjectPropType(descentObjectType.m_pickupTypeIndex
+                    , descentObjectType.m_scoreAmount, descentObjectType.m_ammoCount, descentObjectType.m_lifeCount);
+                return m_pickupDataPanel;
             default:
                 return null;
         }

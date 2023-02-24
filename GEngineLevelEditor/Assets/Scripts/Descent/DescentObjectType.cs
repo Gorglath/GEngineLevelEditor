@@ -72,4 +72,5 @@ public class DescentObjectType : MonoBehaviour
     public int m_wallTextureIndex = -1;
     public int m_floorTextureIndex = -1;
     public int m_enemyTypeIndex = -1;
+    public int m_pickupTypeIndex = -1;
 }
