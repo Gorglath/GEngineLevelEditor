@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cbab996c262414798186e90fdaacc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectType: 1
+  m_objectType: 7
   m_enemyType: 0
   m_obstacleType: 0
   m_pickupType: 0
@@ -123,3 +123,4 @@ MonoBehaviour:
   m_lifeCount: 1
   m_wallTextureIndex: -1
   m_floorTextureIndex: -1
+  m_enemyTypeIndex: -1

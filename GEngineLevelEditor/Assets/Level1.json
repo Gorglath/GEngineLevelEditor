@@ -1,13 +1,13 @@
 {
-    "m_objectType": "WALL",
+    "m_objectType": "OBSTACLE",
     "m_id": 0
 }
 ~
 {
     "m_location": {
-        "x": 16.51788330078125,
+        "x": 17.26824951171875,
         "y": 42.17273712158203,
-        "z": -14.241842269897461
+        "z": -10.343160629272461
     },
     "m_rotation": {
         "x": 0.0,
@@ -22,19 +22,18 @@
 }
 ~
 {
-    "m_wallType": "NORMAL",
-    "m_textureId": 0
+    "m_obstacleType": "SAW"
 }
 ={
-    "m_objectType": "WALL",
+    "m_objectType": "PROP",
     "m_id": 1
 }
 ~
 {
     "m_location": {
-        "x": 16.51788330078125,
+        "x": 17.26824951171875,
         "y": 42.17273712158203,
-        "z": -5.568947792053223
+        "z": -0.8203744888305664
     },
     "m_rotation": {
         "x": 0.0,
@@ -49,227 +48,6 @@
 }
 ~
 {
-    "m_wallType": "RAMP",
-    "m_textureId": 1
-}
-={
-    "m_objectType": "WALL",
-    "m_id": 2
-}
-~
-{
-    "m_location": {
-        "x": 15.042004585266114,
-        "y": 40.4412956237793,
-        "z": -9.800308227539063
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_wallType": "NORMAL",
-    "m_textureId": 2
-}
-={
-    "m_objectType": "FLOOR",
-    "m_id": 3
-}
-~
-{
-    "m_location": {
-        "x": 15.042004585266114,
-        "y": 44.28177261352539,
-        "z": -9.800308227539063
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 270.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_floorType": "NORMAL",
-    "m_textureId": 0
-}
-={
-    "m_objectType": "FLOOR",
-    "m_id": 4
-}
-~
-{
-    "m_location": {
-        "x": 15.042004585266114,
-        "y": 44.28177261352539,
-        "z": -14.504947662353516
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 270.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_floorType": "RAMP",
-    "m_textureId": 1
-}
-={
-    "m_objectType": "FLOOR",
-    "m_id": 5
-}
-~
-{
-    "m_location": {
-        "x": 15.042004585266114,
-        "y": 44.28177261352539,
-        "z": -4.695485591888428
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 270.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_floorType": "NORMAL",
-    "m_textureId": 2
-}
-={
-    "m_objectType": "ENEMY",
-    "m_id": 6
-}
-~
-{
-    "m_location": {
-        "x": 16.51788330078125,
-        "y": 42.17273712158203,
-        "z": -8.173526763916016
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_enemyType": "NORMAL",
-    "m_enemyHealth": 81,
-    "m_enemyTypeIndex": 1
-}
-={
-    "m_objectType": "ENEMY",
-    "m_id": 7
-}
-~
-{
-    "m_location": {
-        "x": 16.51788330078125,
-        "y": 42.17273712158203,
-        "z": -11.019270896911621
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_enemyType": "FAST",
-    "m_enemyHealth": 39,
-    "m_enemyTypeIndex": 2
-}
-={
-    "m_objectType": "ENEMY",
-    "m_id": 8
-}
-~
-{
-    "m_location": {
-        "x": 16.51788330078125,
-        "y": 42.17273712158203,
-        "z": -6.3391032218933109
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_enemyType": "BURST",
-    "m_enemyHealth": 169,
-    "m_enemyTypeIndex": 3
-}
-={
-    "m_objectType": "ENEMY",
-    "m_id": 9
-}
-~
-{
-    "m_location": {
-        "x": 12.138096809387207,
-        "y": 42.17273712158203,
-        "z": -6.3391032218933109
-    },
-    "m_rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-    }
-}
-~
-{
-    "m_enemyType": "BOSS",
-    "m_enemyHealth": 7,
-    "m_enemyTypeIndex": 4
+    "m_propType": "COMPUTER"
 }
 =

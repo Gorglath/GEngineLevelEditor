@@ -99,10 +99,6 @@ public class DataManager : MonoBehaviour
 
                     saveData += JsonUtility.ToJson(floorStruct, true);
                     break;
-                case EDescentObjectType.PROP:
-                    propStruct.m_propType = objectType.m_propType.ToString();
-
-                    saveData += JsonUtility.ToJson(propStruct, true);
                     break;
                 case EDescentObjectType.ENEMY:
                     enemyStruct.m_enemyType = objectType.m_enemyType.ToString();
@@ -123,6 +119,11 @@ public class DataManager : MonoBehaviour
                     obstacleStruct.m_obstacleType = objectType.m_obstacleType.ToString();
 
                     saveData += JsonUtility.ToJson(obstacleStruct,true);
+                    break;
+                case EDescentObjectType.PROP:
+                    propStruct.m_propType = objectType.m_propType.ToString();
+
+                    saveData += JsonUtility.ToJson(propStruct, true);
                     break;
             }
 
@@ -190,13 +191,17 @@ public class DataManager : MonoBehaviour
                 objectType.m_enemyHealth = enemyStruct.m_enemyHealth;
                 objectType.m_enemyTypeIndex = enemyStruct.m_enemyTypeIndex;
                 break;
-            case EDescentObjectType.PLAYER:
-                break;
             case EDescentObjectType.PICKUP:
                 break;
             case EDescentObjectType.OBSTACLE:
+                DescentObstacleDataStruct obstacleStruct = JsonUtility.FromJson<DescentObstacleDataStruct>(saveData);
+
+                objectType.m_obstacleType = Enum.Parse<EDescentObstacleType>(obstacleStruct.m_obstacleType);
                 break;
             case EDescentObjectType.PROP:
+                DescentPropDataStruct propStruct = JsonUtility.FromJson<DescentPropDataStruct>(saveData);
+
+                objectType.m_propType = Enum.Parse<EDescentPropType>(propStruct.m_propType);
                 break;
             default:
                 break;
