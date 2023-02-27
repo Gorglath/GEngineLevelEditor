@@ -24,7 +24,7 @@ public class ScaleGizmos : Gizmo
         m_speedMultiplied = m_speed * value;
     }
 
-    public override void UseGizmo(Transform affectedObject, Vector3 mousePosition)
+    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition)
     {
         if (mousePosition.magnitude == 0)
             return;
@@ -37,7 +37,7 @@ public class ScaleGizmos : Gizmo
         m_previousMousePosition = mousePosition;
     }
 
-    private void UpdateAffectedObjectScale(Transform affectedObject, Vector3 mousePosition)
+    private void UpdateAffectedObjectScale(List<Transform> affectedObject, Vector3 mousePosition)
     {
         Vector3 scaleAxis = Vector3.zero;
         bool isInverted = (m_previousMousePosition.x > mousePosition.x);
@@ -62,6 +62,9 @@ public class ScaleGizmos : Gizmo
         }
 
         float scaleMultiplier = m_speedMultiplied * Time.deltaTime * (isInverted? -1:1);
-        affectedObject.localScale += scaleAxis * scaleMultiplier;
+        foreach (Transform affectedObjectTransform in affectedObject)
+        {
+            affectedObjectTransform.localScale += scaleAxis * scaleMultiplier;
+        }
     }
 }

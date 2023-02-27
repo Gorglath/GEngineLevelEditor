@@ -23,7 +23,7 @@ public class RotationGizmo : Gizmo
         m_speedMultiplied = m_speed * value;
     }
 
-    public override void UseGizmo(Transform affectedObject, Vector3 mousePosition)
+    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition)
     {
         if (mousePosition.magnitude == 0)
             return;
@@ -35,7 +35,7 @@ public class RotationGizmo : Gizmo
         m_previousMousePosition = mousePosition;
     }
 
-    private void UpdateAffectedObjectRotation(Transform affectedObject,Vector3 mousePosition)
+    private void UpdateAffectedObjectRotation(List<Transform> affectedObject,Vector3 mousePosition)
     {
         Vector3 rotationAxis = Vector3.zero;
         bool isInverted = m_previousMousePosition.x > mousePosition.x;
@@ -57,7 +57,10 @@ public class RotationGizmo : Gizmo
         }
 
         float newRotationMultiplier = m_speedMultiplied * ((isInverted) ? -1.0f : 1.0f) * Time.deltaTime;
-        
-        affectedObject.Rotate(rotationAxis * newRotationMultiplier);
+
+        foreach (Transform affectedObjectTransform in affectedObject)
+        {
+            affectedObjectTransform.Rotate(rotationAxis * newRotationMultiplier);
+        }
     }
 }

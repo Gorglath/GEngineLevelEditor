@@ -45,12 +45,14 @@ public class UIManager : MonoBehaviour
         m_currentlySelectedObject = null;
         m_transformPanel.SetActive(false);
     }
-    public void SelectedNewObject(Transform selectedObject)
+    public void SelectedNewObject(List<Transform> selectedObject)
     {
-        if (!selectedObject)
+        if (selectedObject.Count != 1)
+        {
+            m_transformPanel.SetActive(false);
             return;
-
-        m_currentlySelectedObject = selectedObject;
+        }
+        m_currentlySelectedObject = selectedObject[0];
         m_transformPanel.SetActive(true);
 
         RefreshTransformLocation();

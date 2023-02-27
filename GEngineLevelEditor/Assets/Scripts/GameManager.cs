@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!m_selectionManager.GetCurrentlySelectedObject())
+            if (m_selectionManager.GetCurrentlySelectedObject().Count == 0)
             {
                 m_uiManager.UnselectedObject();
                 m_gizmosManager.UnselectedObject();

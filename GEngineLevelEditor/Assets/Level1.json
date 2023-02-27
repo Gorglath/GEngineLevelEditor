@@ -1,13 +1,13 @@
 {
-    "m_objectType": "OBSTACLE",
+    "m_objectType": "WALL",
     "m_id": 0
 }
 ~
 {
     "m_location": {
-        "x": 17.26824951171875,
+        "x": 16.51788330078125,
         "y": 42.17273712158203,
-        "z": -10.343160629272461
+        "z": -10.512334823608399
     },
     "m_rotation": {
         "x": 0.0,
@@ -22,18 +22,19 @@
 }
 ~
 {
-    "m_obstacleType": "SAW"
+    "m_wallType": "NORMAL",
+    "m_textureId": 1
 }
 ={
-    "m_objectType": "PROP",
+    "m_objectType": "WALL",
     "m_id": 1
 }
 ~
 {
     "m_location": {
-        "x": 17.26824951171875,
+        "x": 16.51788330078125,
         "y": 42.17273712158203,
-        "z": -0.8203744888305664
+        "z": -7.74645471572876
     },
     "m_rotation": {
         "x": 0.0,
@@ -48,10 +49,11 @@
 }
 ~
 {
-    "m_propType": "COMPUTER"
+    "m_wallType": "NORMAL",
+    "m_textureId": 2
 }
 ={
-    "m_objectType": "PICKUP",
+    "m_objectType": "WALL",
     "m_id": 2
 }
 ~
@@ -59,7 +61,7 @@
     "m_location": {
         "x": 16.51788330078125,
         "y": 42.17273712158203,
-        "z": -8.173526763916016
+        "z": -4.947865962982178
     },
     "m_rotation": {
         "x": 0.0,
@@ -74,22 +76,19 @@
 }
 ~
 {
-    "m_pickupType": "SCORE",
-    "m_pickupIndex": 1,
-    "m_scoreAmount": 321,
-    "m_lifeCount": 1,
-    "m_ammoAmount": 10
+    "m_wallType": "NORMAL",
+    "m_textureId": 0
 }
 ={
-    "m_objectType": "PICKUP",
+    "m_objectType": "FLOOR",
     "m_id": 3
 }
 ~
 {
     "m_location": {
         "x": 16.51788330078125,
-        "y": 42.17273712158203,
-        "z": -6.16616678237915
+        "y": 46.35150146484375,
+        "z": -11.430830955505371
     },
     "m_rotation": {
         "x": 0.0,
@@ -104,22 +103,19 @@
 }
 ~
 {
-    "m_pickupType": "HEALTH",
-    "m_pickupIndex": 2,
-    "m_scoreAmount": 321,
-    "m_lifeCount": 2,
-    "m_ammoAmount": 10
+    "m_floorType": "NORMAL",
+    "m_textureId": 0
 }
 ={
-    "m_objectType": "PICKUP",
+    "m_objectType": "FLOOR",
     "m_id": 4
 }
 ~
 {
     "m_location": {
-        "x": 12.826227188110352,
-        "y": 42.17273712158203,
-        "z": -6.16616678237915
+        "x": 16.51788330078125,
+        "y": 46.35150146484375,
+        "z": -5.691117763519287
     },
     "m_rotation": {
         "x": 0.0,
@@ -134,22 +130,47 @@
 }
 ~
 {
-    "m_pickupType": "AMMO",
-    "m_pickupIndex": 3,
-    "m_scoreAmount": 321,
-    "m_lifeCount": 2,
-    "m_ammoAmount": 28
+    "m_floorType": "NORMAL",
+    "m_textureId": 1
 }
 ={
-    "m_objectType": "PICKUP",
+    "m_objectType": "ENEMY",
     "m_id": 5
 }
 ~
 {
     "m_location": {
-        "x": 9.055551528930664,
-        "y": 42.17273712158203,
-        "z": -6.16616678237915
+        "x": 16.51788330078125,
+        "y": 46.35150146484375,
+        "z": -8.194860458374024
+    },
+    "m_rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
+~
+{
+    "m_enemyType": "FAST",
+    "m_enemyHealth": 111,
+    "m_enemyTypeIndex": 2
+}
+={
+    "m_objectType": "PICKUP",
+    "m_id": 6
+}
+~
+{
+    "m_location": {
+        "x": 16.51788330078125,
+        "y": 46.35150146484375,
+        "z": -9.920620918273926
     },
     "m_rotation": {
         "x": 0.0,
@@ -166,8 +187,8 @@
 {
     "m_pickupType": "HOSTAGE",
     "m_pickupIndex": 4,
-    "m_scoreAmount": 450,
-    "m_lifeCount": 2,
-    "m_ammoAmount": 28
+    "m_scoreAmount": 503,
+    "m_lifeCount": 1,
+    "m_ammoAmount": 10
 }
 =

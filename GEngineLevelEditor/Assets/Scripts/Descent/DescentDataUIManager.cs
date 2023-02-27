@@ -35,12 +35,12 @@ public class DescentDataUIManager : MonoBehaviour
         m_currentlySelectedObject = null;
         m_didSelectNewObject = false;
     }
-    public void DisplayObjectUIData(Transform selectedObject)
+    public void DisplayObjectUIData(List<Transform> selectedObject)
     {
-        if (!selectedObject)
+        if (selectedObject.Count != 1)
             return;
 
-        DescentObjectType descentObjectType = selectedObject.GetComponent<DescentObjectType>();
+        DescentObjectType descentObjectType = selectedObject[0].GetComponent<DescentObjectType>();
         
         if (!descentObjectType)
             return;

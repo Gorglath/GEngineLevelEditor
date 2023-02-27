@@ -21,7 +21,7 @@ public class LocationGizmo : Gizmo
         m_speedMultiplied = m_speed;
     }
     
-    public override void UseGizmo(Transform affectedObject, Vector3 mousePosition)
+    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition)
     {
         if (mousePosition.magnitude == 0)
             return;
@@ -33,7 +33,7 @@ public class LocationGizmo : Gizmo
         m_previousMousePosition = mousePosition;
     }
 
-    private void UpdateAffectedObjectLocation(Transform affectedObject,Vector3 mousePosition)
+    private void UpdateAffectedObjectLocation(List<Transform> affectedObject,Vector3 mousePosition)
     {
         Vector3 direction = (mousePosition - m_previousMousePosition).normalized;
         switch (m_locationGizmoType)
@@ -60,37 +60,40 @@ public class LocationGizmo : Gizmo
         }
     }
 
-    private void MoveUpRight(Transform affectedObject, Vector3 dir)
+    private void MoveUpRight(List<Transform> affectedObject, Vector3 dir)
     {
         Vector3 direction = new Vector3(dir.x, dir.y, 0.0f);
 
         MoveAffectedObject(affectedObject, direction);
     }
 
-    private void MoveUpForward(Transform affectedObject, Vector3 dir)
+    private void MoveUpForward(List<Transform> affectedObject, Vector3 dir)
     {
         Vector3 direction = new Vector3(0.0f, dir.y, dir.x);
 
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveUp(Transform affectedObject,Vector3 dir)
+    private void MoveUp(List<Transform> affectedObject,Vector3 dir)
     {
         Vector3 direction = new Vector3(0.0f, dir.y, 0.0f);
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveForward(Transform affectedObject, Vector3 dir)
+    private void MoveForward(List<Transform> affectedObject, Vector3 dir)
     {
         Vector3 direction = new Vector3(0.0f, 0.0f, dir.x);
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveRight(Transform affectedObject, Vector3 dir)
+    private void MoveRight(List<Transform> affectedObject, Vector3 dir)
     {
         Vector3 direction = new Vector3(dir.x, 0.0f, 0.0f);
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveAffectedObject(Transform affectedObject,Vector3 direction)
+    private void MoveAffectedObject(List<Transform> affectedObject,Vector3 direction)
     {
-        affectedObject.position += direction * Time.deltaTime * m_speedMultiplied;
+        foreach (Transform affectedObjectTransform in affectedObject)
+        {
+            affectedObjectTransform.position += direction * Time.deltaTime * m_speedMultiplied;
+        }
     }
 
     public override void MultiplySpeed(float value)

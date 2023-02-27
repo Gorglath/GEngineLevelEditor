@@ -100,12 +100,12 @@ public class AssetManager : MonoBehaviour
         return didSpawnNewObject;
     }
     public Transform GetNewlySpawnedObject() { return m_lastSpawnedObject; }
-    public void UpdateSelectedObject(Transform currentlySelectedObject)
+    public void UpdateSelectedObject(List<Transform> currentlySelectedObject)
     {
-        if (!currentlySelectedObject)
+        if (currentlySelectedObject.Count == 0)
             return;
 
-        m_currentlySelectedObject = currentlySelectedObject;
+        m_currentlySelectedObject = currentlySelectedObject[currentlySelectedObject.Count - 1];
     }
 
     public void ResetSelectedObject()

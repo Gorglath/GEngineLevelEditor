@@ -14,12 +14,11 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private LayerMask m_gizmoSelectionLayer = 0;
 
     //helpers
-    private Transform m_currentlySelectedObject = null;
+    private List<Transform> m_currentlySelectedObject = new List<Transform>();
     private Transform m_currentlySelectedGizmo = null;
     private Vector3 m_mousePosition = Vector3.zero;
     private bool m_didSelectNewObject = false;
     private bool m_didSelectGizmo = false;
-    private bool m_isHoldingSelect = false;
     public void UpdateSelectionManager(PlayerInput playerInput)
     {
         UpdateObjectSelection(playerInput);
@@ -28,17 +27,28 @@ public class SelectionManager : MonoBehaviour
     public void UnselectObject()
     {
         m_didSelectNewObject = false;
-        m_currentlySelectedObject = null;
+        m_currentlySelectedObject.Clear();
     }
     public void SelectObject(Transform objectToSelect)
     {
+        if (!objectToSelect)
+            return;
+
+        m_currentlySelectedObject.Clear();
+        m_currentlySelectedObject.Add(objectToSelect);
+        m_didSelectNewObject = true;
+    }
+    public void SelectObject(List<Transform> objectToSelect)
+    {
+        if (objectToSelect.Count == 0)
+            return;
+
         m_currentlySelectedObject = objectToSelect;
         m_didSelectNewObject = true;
     }
     public Vector3 GetMousePosition() { return m_mousePosition; } 
     private void UpdateObjectSelection(PlayerInput playerInput)
     {
-        m_isHoldingSelect = playerInput.actions[m_mouseSelectionActionName].IsPressed();
         m_mousePosition = playerInput.actions[m_mousePositionActionName].ReadValue<Vector2>();
         
         if(playerInput.actions[m_mouseSelectionActionName].WasReleasedThisFrame())
@@ -82,14 +92,14 @@ public class SelectionManager : MonoBehaviour
 
     private void HandleObjectSelect(RaycastHit hit)
     {
-        if (m_currentlySelectedObject == hit.transform)
+        if (m_currentlySelectedObject.Contains(hit.transform))
             return;
 
-        m_currentlySelectedObject = hit.transform;
+        m_currentlySelectedObject.Add(hit.transform);
         m_didSelectNewObject = true;
 
     }
-    public Transform GetCurrentlySelectedObject() { return m_currentlySelectedObject; }
+    public List<Transform> GetCurrentlySelectedObject() { return m_currentlySelectedObject; }
     public Transform GetCurrentlySelectedGizmo() { return m_currentlySelectedGizmo; }
     public bool GetDidSelectNewObject() { return m_didSelectNewObject; }
     public bool GetDidSelectNewGizmo() { return m_didSelectGizmo; }

@@ -30,7 +30,7 @@ public class GizmosManager : MonoBehaviour
     //helpers
     private EGizmoState m_currentGizmoState = EGizmoState.LOCATION;
     private Gizmo m_currentlySelectedGizmo = null;
-    private Transform m_currentlySelectedObject = null;
+    private List<Transform> m_currentlySelectedObject = new List<Transform>();
     public void UpdateGizmos(PlayerInput playerInput, Vector3 mousePosition)
     {
         UpdateGizmosLocation();
@@ -40,16 +40,16 @@ public class GizmosManager : MonoBehaviour
 
     private void UpdateGizmosLocation()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
-        m_locationGizmos.transform.position = m_currentlySelectedObject.position;
-        m_rotationGizmos.transform.position = m_currentlySelectedObject.position;
-        m_scaleGizmos.transform.position = m_currentlySelectedObject.position;
+        m_locationGizmos.transform.position = m_currentlySelectedObject[m_currentlySelectedObject.Count -1].position;
+        m_rotationGizmos.transform.position = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].position;
+        m_scaleGizmos.transform.position = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].position;
     }
     public void UnselectedObject()
     {
-        m_currentlySelectedObject = null;
+        m_currentlySelectedObject.Clear();
 
         m_locationGizmos.SetActive(false);
         m_rotationGizmos.SetActive(false);
@@ -60,7 +60,7 @@ public class GizmosManager : MonoBehaviour
         if (!m_currentlySelectedGizmo)
             return;
 
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
         m_currentlySelectedGizmo.UseGizmo(m_currentlySelectedObject,mousePosition);
@@ -174,9 +174,9 @@ public class GizmosManager : MonoBehaviour
             m_scaleGizmos.SetActive(true);
         }
     }
-    public void UpdateGizmosLocation(Transform newlySelectedObject)
+    public void UpdateGizmosLocation(List<Transform> newlySelectedObject)
     {
-        if (!newlySelectedObject)
+        if (newlySelectedObject.Count == 0)
             return;
 
         ActivateGizmoOnSelection();

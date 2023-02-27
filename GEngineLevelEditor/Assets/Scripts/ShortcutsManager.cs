@@ -18,12 +18,12 @@ public class ShortcutsManager : MonoBehaviour
     [SerializeField] private string m_fActionName = null;
 
     //helpers
-    private Vector3 m_currentlyCopiedObjectPosition = Vector3.zero;
-    private Vector3 m_currentlyCopiedObjectRotation = Vector3.zero;
-    private Vector3 m_currentlyCopiedObjectScale = Vector3.zero;
-    private GameObject m_currentCopiedObject = null;
-    private GameObject m_currentlySelectedObject = null;
-    private GameObject m_newlyCreatedObject = null;
+    private List<Vector3> m_currentlyCopiedObjectPosition = new List<Vector3>();
+    private List<Vector3> m_currentlyCopiedObjectRotation = new List<Vector3>();
+    private List<Vector3> m_currentlyCopiedObjectScale = new List<Vector3>();
+    private List<Transform> m_currentCopiedObject = new List<Transform>();
+    private List<Transform> m_currentlySelectedObject = new List<Transform>();
+    private List<Transform> m_newlyCreatedObject = new List<Transform>();
     private bool m_didCreateNewObject = false;
     private bool m_didDeleteSelectedObject = false;
     private bool m_isPressingCtrl = false;
@@ -76,69 +76,89 @@ public class ShortcutsManager : MonoBehaviour
 
     private void DeleteSelectedObject()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
-        Destroy(m_currentlySelectedObject);
+        for (int i = 0; i < m_currentlySelectedObject.Count; i++)
+        {
+            Destroy(m_currentlySelectedObject[i].gameObject);
+        }
         m_didDeleteSelectedObject = true;
     }
     private void FocusOnObject()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
         
-        Vector3 newPos = m_currentlySelectedObject.transform.position - Vector3.forward * 10;
+        Vector3 newPos = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].position - Vector3.forward * 10;
         newPos += Vector3.up * 10;
         Camera.main.transform.position = newPos;
-        Camera.main.transform.rotation = Quaternion.LookRotation(m_currentlySelectedObject.transform.position - newPos);
+        Camera.main.transform.rotation = Quaternion.LookRotation(m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].position - newPos);
         
     }
-    public void UpdateSelection(Transform newObject)
+    public void UpdateSelection(List<Transform> newObject)
     {
-        if (!newObject)
+        if (newObject.Count == 0)
             return;
 
-        m_currentlySelectedObject = newObject.gameObject;
+        m_currentlySelectedObject = newObject;
     }
 
     public void RemoveSelection()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
-        m_currentlySelectedObject = null;
+        m_currentlySelectedObject.Clear();
     }
     private void Duplicate()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
+        List<Transform> newlyCreatedObjects = new List<Transform>();
+        foreach (Transform selectedObject in m_currentlySelectedObject)
+        {
+            newlyCreatedObjects.Add(Instantiate(selectedObject.gameObject, selectedObject.parent).transform);
+        }
         m_didCreateNewObject = true;
-        m_newlyCreatedObject = Instantiate(m_currentlySelectedObject, m_currentlySelectedObject.transform.parent);
+        m_newlyCreatedObject = newlyCreatedObjects;
     }
 
     private void Copy()
     {
-        if (!m_currentlySelectedObject)
+        if (m_currentlySelectedObject.Count == 0)
             return;
 
         m_currentCopiedObject = m_currentlySelectedObject;
-        m_currentlyCopiedObjectPosition = m_currentlySelectedObject.transform.position;
-        m_currentlyCopiedObjectRotation = m_currentlySelectedObject.transform.eulerAngles;
-        m_currentlyCopiedObjectScale = m_currentlySelectedObject.transform.localScale;
+        for (int i = 0; i < m_currentlySelectedObject.Count; i++)
+        {
+            m_currentlyCopiedObjectPosition.Add(m_currentlySelectedObject[i].position);
+            m_currentlyCopiedObjectRotation.Add(m_currentlySelectedObject[i].eulerAngles);
+            m_currentlyCopiedObjectScale.Add(m_currentlySelectedObject[i].localScale);
+        }
     }
 
     private void Paste()
     {
-        if (!m_currentCopiedObject)
+        if (m_currentCopiedObject.Count == 0)
             return;
 
         m_didCreateNewObject = true;
-        m_newlyCreatedObject = Instantiate(m_currentCopiedObject,m_currentCopiedObject.transform.parent);
+        List<Transform> newlyCreatedObjects = new List<Transform>();
+        GameObject createdObject = null;
+        for (int i = 0; i < m_currentlySelectedObject.Count; i++)
+        {
+            createdObject = Instantiate(m_currentlySelectedObject[i].gameObject, m_currentlySelectedObject[i].parent);
+            createdObject.transform.position = m_currentlyCopiedObjectPosition[i];
+            createdObject.transform.eulerAngles = m_currentlyCopiedObjectRotation[i];
+            createdObject.transform.localScale = m_currentlyCopiedObjectScale[i];
 
-        m_newlyCreatedObject.transform.position = m_currentlyCopiedObjectPosition;
-        m_newlyCreatedObject.transform.eulerAngles = m_currentlyCopiedObjectRotation;
-        m_newlyCreatedObject.transform.localScale = m_currentlyCopiedObjectScale;
+            newlyCreatedObjects.Add(createdObject.transform);
+        }
+        
+        m_didCreateNewObject = true;
+        m_newlyCreatedObject = newlyCreatedObjects;
     }
 
     private void Save()
@@ -146,9 +166,9 @@ public class ShortcutsManager : MonoBehaviour
         m_dataManager.SaveLevel(EGameType.DESCENT);
     }
 
-    public Transform GetNewlyCreatedObject()
+    public List<Transform> GetNewlyCreatedObject()
     {
-        return m_newlyCreatedObject.transform;
+        return m_newlyCreatedObject;
     }
     public bool GetDidCreateNewObject()
     {
