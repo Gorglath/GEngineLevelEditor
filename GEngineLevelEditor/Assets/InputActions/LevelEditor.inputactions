@@ -114,6 +114,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "e7f9c7fd-c6f8-4cee-8850-165818401173",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "C",
                     "type": "Button",
                     "id": "74884510-dcc9-4486-a332-9fd97683421b",
@@ -153,6 +162,15 @@
                     "name": "F",
                     "type": "Button",
                     "id": "5afa8fa4-78b4-4335-ad3e-75840f929274",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "L",
+                    "type": "Button",
+                    "id": "e29b4ad6-7b1c-4054-b0b6-53afaf029166",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -485,6 +503,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e19e8ee7-22a9-42a7-8499-f0518f0789f3",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8f5510b-c950-487f-aa15-a26c618a88fe",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

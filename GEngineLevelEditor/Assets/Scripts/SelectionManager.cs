@@ -19,6 +19,8 @@ public class SelectionManager : MonoBehaviour
     private Vector3 m_mousePosition = Vector3.zero;
     private bool m_didSelectNewObject = false;
     private bool m_didSelectGizmo = false;
+    private bool m_isMultiSelectionEnabled = false;
+    public void SetIsMultiSelectionEnabled(bool value) { m_isMultiSelectionEnabled = value; }
     public void UpdateSelectionManager(PlayerInput playerInput)
     {
         UpdateObjectSelection(playerInput);
@@ -78,7 +80,8 @@ public class SelectionManager : MonoBehaviour
         }
         else
         {
-            m_currentlySelectedObject = null;
+            if(m_currentlySelectedObject.Count > 0)
+                m_currentlySelectedObject.Clear();
             m_didSelectNewObject = true;
         }
     }
@@ -95,6 +98,8 @@ public class SelectionManager : MonoBehaviour
         if (m_currentlySelectedObject.Contains(hit.transform))
             return;
 
+        if (!m_isMultiSelectionEnabled)
+            m_currentlySelectedObject.Clear();
         m_currentlySelectedObject.Add(hit.transform);
         m_didSelectNewObject = true;
 

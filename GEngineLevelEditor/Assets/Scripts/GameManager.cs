@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
             return;
 
         m_shortcutsManager.UpdateShortcutManager(m_playerInput);
-
+        m_selectionManager.SetIsMultiSelectionEnabled(m_shortcutsManager.GetIsHoldingShift());
         if (!m_descentUIDataManager)
             return;
 

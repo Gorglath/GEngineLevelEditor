@@ -21,10 +21,6 @@ public class DataManager : MonoBehaviour
     [SerializeField] private AssetManager m_assetManger = null;
     [SerializeField] private DropdownImageLinker m_dropdownLinker = null;
 
-    private void Start()
-    {
-        LoadLevel(EGameType.DESCENT);
-    }
     public void SaveLevel(EGameType gameType)
     {
         string saveData = "";

@@ -11,11 +11,13 @@ public class ShortcutsManager : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private string m_deleteActionName = null;
     [SerializeField] private string m_ctrlDownActionName = null;
+    [SerializeField] private string m_shiftActionName = null;
     [SerializeField] private string m_cActionName = null;
     [SerializeField] private string m_vActionName = null;
     [SerializeField] private string m_dActionName = null;
     [SerializeField] private string m_sActionName = null;
     [SerializeField] private string m_fActionName = null;
+    [SerializeField] private string m_lActionName = null;
 
     //helpers
     private List<Vector3> m_currentlyCopiedObjectPosition = new List<Vector3>();
@@ -26,13 +28,17 @@ public class ShortcutsManager : MonoBehaviour
     private List<Transform> m_newlyCreatedObject = new List<Transform>();
     private bool m_didCreateNewObject = false;
     private bool m_didDeleteSelectedObject = false;
+    private bool m_isPressingShift = false;
     private bool m_isPressingCtrl = false;
     private bool m_isPressingD = false;
     private bool m_isPressingC = false;
     private bool m_isPressingV = false;
     private bool m_isPressingS = false;
     private bool m_isPressingF = false;
+    private bool m_isPressingL = false;
     private bool m_isPressingDelete = false;
+
+    public bool GetIsHoldingShift() { return m_isPressingShift; }
     public void UpdateShortcutManager(PlayerInput playerInput)
     {
         UpdateInputs(playerInput);
@@ -61,16 +67,21 @@ public class ShortcutsManager : MonoBehaviour
 
         if (m_isPressingV)
             Paste();
+
+        if (m_isPressingL)
+            LoadLevel();
             
     }
     private void UpdateInputs(PlayerInput playerInput)
     {
+        m_isPressingShift = playerInput.actions[m_shiftActionName].IsPressed();
         m_isPressingCtrl = playerInput.actions[m_ctrlDownActionName].IsPressed();
         m_isPressingC = playerInput.actions[m_cActionName].WasPressedThisFrame();
         m_isPressingS = playerInput.actions[m_sActionName].WasPressedThisFrame();
         m_isPressingV = playerInput.actions[m_vActionName].WasPressedThisFrame();
         m_isPressingD = playerInput.actions[m_dActionName].WasPressedThisFrame();
         m_isPressingF = playerInput.actions[m_fActionName].WasPressedThisFrame();
+        m_isPressingL = playerInput.actions[m_lActionName].WasPressedThisFrame();
         m_isPressingDelete = playerInput.actions[m_deleteActionName].WasPressedThisFrame();
     }
 
@@ -166,6 +177,11 @@ public class ShortcutsManager : MonoBehaviour
         m_dataManager.SaveLevel(EGameType.DESCENT);
     }
 
+    private void LoadLevel()
+    {
+        m_dataManager.LoadLevel(EGameType.DESCENT);
+    }
+    
     public List<Transform> GetNewlyCreatedObject()
     {
         return m_newlyCreatedObject;
