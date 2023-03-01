@@ -141,6 +141,9 @@ public class ShortcutsManager : MonoBehaviour
         if (m_currentlySelectedObject.Count == 0)
             return;
 
+        m_currentlyCopiedObjectPosition.Clear();
+        m_currentlyCopiedObjectRotation.Clear();
+        m_currentlyCopiedObjectScale.Clear();
         m_currentCopiedObject = m_currentlySelectedObject;
         for (int i = 0; i < m_currentlySelectedObject.Count; i++)
         {
