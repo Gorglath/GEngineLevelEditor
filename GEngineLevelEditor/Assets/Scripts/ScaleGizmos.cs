@@ -24,7 +24,7 @@ public class ScaleGizmos : Gizmo
         m_speedMultiplied = m_speed * value;
     }
 
-    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition)
+    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition,bool isLocal)
     {
         if (mousePosition.magnitude == 0)
             return;

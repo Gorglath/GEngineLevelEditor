@@ -177,12 +177,12 @@ public class ShortcutsManager : MonoBehaviour
 
     private void Save()
     {
-        m_dataManager.SaveLevel(EGameType.DESCENT);
+        m_dataManager.SaveLevel();
     }
 
     private void LoadLevel()
     {
-        m_dataManager.LoadLevel(EGameType.DESCENT);
+        m_dataManager.LoadLevel();
     }
     
     public List<Transform> GetNewlyCreatedObject()

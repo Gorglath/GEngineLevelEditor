@@ -21,7 +21,7 @@ public class LocationGizmo : Gizmo
         m_speedMultiplied = m_speed;
     }
     
-    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition)
+    public override void UseGizmo(List<Transform> affectedObject, Vector3 mousePosition,bool isLocalSpace)
     {
         if (mousePosition.magnitude == 0)
             return;
@@ -29,11 +29,11 @@ public class LocationGizmo : Gizmo
         if (mousePosition == m_previousMousePosition)
             return;
 
-        UpdateAffectedObjectLocation(affectedObject, mousePosition);
+        UpdateAffectedObjectLocation(affectedObject, mousePosition,isLocalSpace);
         m_previousMousePosition = mousePosition;
     }
 
-    private void UpdateAffectedObjectLocation(List<Transform> affectedObject,Vector3 mousePosition)
+    private void UpdateAffectedObjectLocation(List<Transform> affectedObject,Vector3 mousePosition,bool isLocalSpace)
     {
         Vector3 direction = (mousePosition - m_previousMousePosition).normalized;
         switch (m_locationGizmoType)
@@ -41,51 +41,75 @@ public class LocationGizmo : Gizmo
             case ELocationGizmoType.NONE:
                 return;
             case ELocationGizmoType.UP:
-                MoveUp(affectedObject, direction);
+                MoveUp(affectedObject, direction,isLocalSpace);
                 break;
             case ELocationGizmoType.FORWARD:
-                MoveForward(affectedObject, direction);
+                MoveForward(affectedObject, direction, isLocalSpace);
                 break;
             case ELocationGizmoType.RIGHT:
-                MoveRight(affectedObject, direction);
+                MoveRight(affectedObject, direction, isLocalSpace);
                 break;
             case ELocationGizmoType.UP_RIGHT:
-                MoveUpRight(affectedObject, direction);
+                MoveUpRight(affectedObject, direction, isLocalSpace);
                 break;
             case ELocationGizmoType.UP_FORWARD:
-                MoveUpForward(affectedObject,direction);
+                MoveUpForward(affectedObject,direction, isLocalSpace);
                 break;
             default:
                 return;
         }
     }
 
-    private void MoveUpRight(List<Transform> affectedObject, Vector3 dir)
+    private void MoveUpRight(List<Transform> affectedObject, Vector3 dir, bool isLocalSpace)
     {
-        Vector3 direction = new Vector3(dir.x, dir.y, 0.0f);
-
+        Vector3 direction;
+        if (!isLocalSpace)
+            direction = new Vector3(dir.x, dir.y, 0.0f);
+        else
+            direction = (affectedObject[affectedObject.Count - 1].up * dir.y
+                + affectedObject[affectedObject.Count - 1].right * dir.x).normalized;
         MoveAffectedObject(affectedObject, direction);
     }
 
-    private void MoveUpForward(List<Transform> affectedObject, Vector3 dir)
+    private void MoveUpForward(List<Transform> affectedObject, Vector3 dir, bool isLocalSpace)
     {
-        Vector3 direction = new Vector3(0.0f, dir.y, dir.x);
+        Vector3 direction;
+
+        if (!isLocalSpace)
+            direction = new Vector3(0.0f, dir.y, dir.x);
+        else
+            direction = (affectedObject[affectedObject.Count - 1].up * dir.y
+                + affectedObject[affectedObject.Count - 1].forward * dir.x).normalized;
 
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveUp(List<Transform> affectedObject,Vector3 dir)
+    private void MoveUp(List<Transform> affectedObject,Vector3 dir, bool isLocalSpace)
     {
-        Vector3 direction = new Vector3(0.0f, dir.y, 0.0f);
+        Vector3 direction;
+        if (!isLocalSpace)
+            direction = new Vector3(0.0f, dir.y, 0.0f);
+        else
+            direction = affectedObject[affectedObject.Count - 1].up * dir.y;
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveForward(List<Transform> affectedObject, Vector3 dir)
+    private void MoveForward(List<Transform> affectedObject, Vector3 dir, bool isLocalSpace)
     {
-        Vector3 direction = new Vector3(0.0f, 0.0f, dir.x);
+        Vector3 direction;
+        if (!isLocalSpace)
+            direction = new Vector3(0.0f, 0.0f, dir.x);
+        else
+            direction = affectedObject[affectedObject.Count - 1].forward * dir.y;
         MoveAffectedObject(affectedObject, direction);
     }
-    private void MoveRight(List<Transform> affectedObject, Vector3 dir)
+    private void MoveRight(List<Transform> affectedObject, Vector3 dir, bool isLocalSpace)
     {
-        Vector3 direction = new Vector3(dir.x, 0.0f, 0.0f);
+        Vector3 direction;
+
+        if (!isLocalSpace)
+            direction = new Vector3(dir.x, 0.0f, 0.0f);
+        else
+            direction = affectedObject[affectedObject.Count - 1].right * dir.y;
+        
         MoveAffectedObject(affectedObject, direction);
     }
     private void MoveAffectedObject(List<Transform> affectedObject,Vector3 direction)

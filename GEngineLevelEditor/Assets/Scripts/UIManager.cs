@@ -35,7 +35,16 @@ public class UIManager : MonoBehaviour
     private Vector3 m_currentTransformPosition = Vector3.zero;
     private Vector3 m_currentTransformEular = Vector3.zero;
     private Vector3 m_currentTransformScale = Vector3.zero;
+    private bool m_isLocalSpaceTransform = false;
 
+    public void SetIsLOcalSpaceTransform(bool value)
+    {
+        m_isLocalSpaceTransform = value;
+    }
+    public bool GetIsLocalSpaceTransform()
+    {
+        return m_isLocalSpaceTransform;
+    }
     public bool GetIsSelectingUI()
     {
         return m_eventSystem.IsPointerOverGameObject();

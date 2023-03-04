@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateManagersCommunication()
     {
+        m_gizmosManager.SetIsLocalSpaceTransform(m_uiManager.GetIsLocalSpaceTransform());
+
         if(m_shortcutsManager.GetDidCreateNewObject())
         {
             m_selectionManager.SelectObject(m_shortcutsManager.GetNewlyCreatedObject());

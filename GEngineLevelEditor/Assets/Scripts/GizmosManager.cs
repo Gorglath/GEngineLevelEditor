@@ -31,6 +31,12 @@ public class GizmosManager : MonoBehaviour
     private EGizmoState m_currentGizmoState = EGizmoState.LOCATION;
     private Gizmo m_currentlySelectedGizmo = null;
     private List<Transform> m_currentlySelectedObject = new List<Transform>();
+    private bool m_isLocalSpaceTransform = false;
+    public void SetIsLocalSpaceTransform(bool value)
+    {
+        m_isLocalSpaceTransform = value;
+        UpdateGizmoOrientation();
+    }
     public void UpdateGizmos(PlayerInput playerInput, Vector3 mousePosition)
     {
         UpdateGizmosLocation();
@@ -63,7 +69,7 @@ public class GizmosManager : MonoBehaviour
         if (m_currentlySelectedObject.Count == 0)
             return;
 
-        m_currentlySelectedGizmo.UseGizmo(m_currentlySelectedObject,mousePosition);
+        m_currentlySelectedGizmo.UseGizmo(m_currentlySelectedObject,mousePosition,m_isLocalSpaceTransform);
     }
 
     private void UpdateGizmosInput(PlayerInput playerInput)
@@ -79,8 +85,10 @@ public class GizmosManager : MonoBehaviour
             m_rotationGizmos.SetActive(false);
             m_scaleGizmos.SetActive(false);
 
-            m_locationGizmos.transform.forward = Vector3.forward;
-            
+            if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+                m_locationGizmos.transform.forward = Vector3.forward;
+            else if (m_isLocalSpaceTransform)
+                m_locationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
             return;
         }
 
@@ -95,7 +103,10 @@ public class GizmosManager : MonoBehaviour
             m_rotationGizmos.SetActive(true);
             m_scaleGizmos.SetActive(false);
 
-            m_rotationGizmos.transform.forward = Vector3.forward;
+            if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+                m_rotationGizmos.transform.forward = Vector3.forward;
+            else if (m_isLocalSpaceTransform)
+                m_rotationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
 
             return;
         }
@@ -111,12 +122,32 @@ public class GizmosManager : MonoBehaviour
             m_rotationGizmos.SetActive(false);
             m_scaleGizmos.SetActive(true);
 
-            m_scaleGizmos.transform.forward = Vector3.forward;
+            if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+                m_scaleGizmos.transform.forward = Vector3.forward;
+            else if (m_isLocalSpaceTransform)
+                m_scaleGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
 
             return;
         }
     }
 
+    private void UpdateGizmoOrientation()
+    {
+        if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+            m_locationGizmos.transform.forward = Vector3.forward;
+        else if (m_isLocalSpaceTransform)
+            m_locationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
+
+        if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+            m_rotationGizmos.transform.forward = Vector3.forward;
+        else if (m_isLocalSpaceTransform)
+            m_rotationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
+
+        if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
+            m_scaleGizmos.transform.forward = Vector3.forward;
+        else if (m_isLocalSpaceTransform)
+            m_scaleGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
+    }
     public void HandleSelectedGizmo(Transform selectedGizmo)
     {
         if(!selectedGizmo)
@@ -173,6 +204,8 @@ public class GizmosManager : MonoBehaviour
             m_rotationGizmos.SetActive(false);
             m_scaleGizmos.SetActive(true);
         }
+
+        UpdateGizmoOrientation();
     }
     public void UpdateGizmosLocation(List<Transform> newlySelectedObject)
     {

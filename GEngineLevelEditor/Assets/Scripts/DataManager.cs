@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EGameType
-{
-    NONE,
-    DESCENT
-}
 public struct TransformDataStruct
 {
     public Vector3 m_location;
@@ -21,29 +16,40 @@ public class DataManager : MonoBehaviour
     [SerializeField] private AssetManager m_assetManger = null;
     [SerializeField] private DropdownImageLinker m_dropdownLinker = null;
 
-    public void SaveLevel(EGameType gameType)
+    //helpers
+    private string m_levelName = "";
+    public void SetLevelFileName(string LevelName)
     {
-        string saveData = "";
-        if (gameType == EGameType.DESCENT)
-            saveData = SaveDescentLevel();
-
-        System.IO.File.WriteAllText(Application.dataPath + "/Level1.json", saveData);
+        m_levelName = LevelName;
+        m_levelName += ".json";
     }
-    public void LoadLevel(EGameType gameType)
+    public void SaveLevel()
     {
+        if (m_levelName == "")
+            return;
+        string saveData = "";
+        
+        saveData = SaveDescentLevel();
+
+        System.IO.File.WriteAllText(Application.dataPath + "/" + m_levelName, saveData);
+    }
+    public void LoadLevel()
+    {
+        if (m_levelName == "")
+            return;
+
         for (int i = 0; i < m_levelParent.childCount; i++)
         {
             Destroy(m_levelParent.GetChild(i).gameObject);
         }
 
-        string saveData = System.IO.File.ReadAllText(Application.dataPath + "/Level1.json");
+        string saveData = System.IO.File.ReadAllText(Application.dataPath + "/" + m_levelName);
         if (saveData.Length == 0)
             return;
 
         string[] saveDataArray = saveData.Split('=',StringSplitOptions.RemoveEmptyEntries);
 
-        if (gameType == EGameType.DESCENT)
-            LoadDescentGame(saveDataArray);
+        LoadDescentGame(saveDataArray);
 
     }
     private string SaveDescentLevel()
