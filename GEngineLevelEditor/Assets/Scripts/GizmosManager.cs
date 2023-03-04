@@ -88,7 +88,12 @@ public class GizmosManager : MonoBehaviour
             if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
                 m_locationGizmos.transform.forward = Vector3.forward;
             else if (m_isLocalSpaceTransform)
-                m_locationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
+            {
+               m_locationGizmos.transform.rotation = 
+                    Quaternion.LookRotation(m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward,
+                    m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].up);
+                //m_locationGizmos.transform.up = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].up;
+            }
             return;
         }
 
@@ -106,8 +111,10 @@ public class GizmosManager : MonoBehaviour
             if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
                 m_rotationGizmos.transform.forward = Vector3.forward;
             else if (m_isLocalSpaceTransform)
+            {
                 m_rotationGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
-
+                m_rotationGizmos.transform.up = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].up;
+            }
             return;
         }
 
@@ -125,8 +132,10 @@ public class GizmosManager : MonoBehaviour
             if (!m_isLocalSpaceTransform && m_currentlySelectedObject.Count > 0)
                 m_scaleGizmos.transform.forward = Vector3.forward;
             else if (m_isLocalSpaceTransform)
+            {
                 m_scaleGizmos.transform.forward = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].forward;
-
+                m_scaleGizmos.transform.up = m_currentlySelectedObject[m_currentlySelectedObject.Count - 1].up;
+            }
             return;
         }
     }
